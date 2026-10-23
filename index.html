@@ -167,6 +167,32 @@
   .pull::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--sage); transform-origin: top; }
   .anim .pull.pending::before { transform: scaleY(0); }
   .anim .pull::before { transition: transform 1.4s var(--ease) .3s; }
+  /* case-study cards */
+  .pcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+  .pcard { display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit; background: var(--plaster); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s, opacity 1s var(--ease); }
+  .pcard:hover { transform: translateY(-6px); border-color: var(--moss); box-shadow: 0 30px 50px -34px rgba(36,38,31,.6); }
+  .pc-img { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--line); }
+  .pc-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--ease); }
+  .pcard:hover .pc-img img { transform: scale(1.06); }
+  .pc-body { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; flex: 1; }
+  .pc-body b { font: 500 26px/1.12 var(--display); }
+  .pc-sub { color: var(--ash); font-size: 15px; line-height: 1.5; }
+  .pc-stat { font-size: 14px; color: var(--ash); padding-top: 10px; border-top: 1px solid var(--line); margin-top: 4px; }
+  .pc-stat b { font: 500 22px var(--display); color: var(--moss); }
+  .pcard .go { margin-top: auto; padding-top: 6px; font: 13px var(--mono); color: var(--moss); transition: transform .5s var(--ease); }
+  .pcard:hover .go { transform: translateX(6px); }
+  .selected { padding-block: 24px 96px; }
+  .sel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 32px; }
+  .sel-head h2 { font-size: clamp(40px, 6vw, 72px); font-weight: 400; margin-top: 10px; }
+  .sel-all { font: 13px var(--mono); text-decoration: none; }
+  .feature { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 16px; }
+  .feature .pcard:first-child { grid-row: 1 / span 2; }
+  .feature .pcard:first-child .pc-img { aspect-ratio: auto; flex: 1; min-height: 340px; }
+  .feature .pcard:first-child .pc-body b { font-size: clamp(30px, 3.4vw, 42px); }
+  .feature .pcard:not(:first-child) .pc-sub { display: none; }
+  .step .pcards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+  @media (max-width: 860px) { .feature { grid-template-columns: minmax(0, 1fr); } .feature .pcard:first-child { grid-row: auto; } .feature .pcard:first-child .pc-img { min-height: 0; aspect-ratio: 16 / 10; } .selected { padding-block: 8px 64px; } }
+
 
   /* creative work: real pieces, each opening a gallery */
   .banner { position: relative; margin: 0 0 40px; border-radius: 4px; overflow: hidden; aspect-ratio: 21 / 8; max-width: 100%; background: var(--line); transition: opacity 1s var(--ease), transform 1s var(--ease); }
@@ -425,6 +451,17 @@
       <span>light</span><span>climate</span><span>people</span><span>materials</span><span>water</span><span>craft</span>
     </div>
   </div>
+  <!-- SELECTED WORK -->
+  <section class="selected" id="work">
+    <div class="wrap">
+      <div class="sel-head">
+        <div><span class="mono" data-reveal>Selected work</span><h2 data-reveal class="split">Start with these</h2></div>
+        <a class="sel-all" href="#boston" data-reveal>All graduate projects ↓</a>
+      </div>
+      <div class="feature"><!-- build:feature studio-mrittika,integrated-systems,if-walls-could-talk --><a class="pcard big" href="projects/studio-mrittika/" data-reveal><span class="pc-img"><img src="projects/studio-mrittika/cover.jpg" alt="" width="1600" height="998" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Design</span><b>Mrittika</b><span class="pc-sub">A pottery and sculptural experience centre in Ramanagara, Karnataka, designed as my undergraduate thesis.</span><span class="pc-stat"><b>5</b> blocks on the site</span><span class="go">Read the case study →</span></span></a><a class="pcard big" href="projects/integrated-systems/" data-reveal><span class="pc-img"><img src="projects/integrated-systems/cover.jpg" alt="" width="1600" height="557" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Building systems</span><b>Integrated Systems Section: Seattle School</b><span class="pc-sub">A single building section for a south-facing classroom wing that brings daylight, passive solar heating, ventilation, acoustics, rainwater and solar power together in one design.</span><span class="pc-stat"><b>58%</b> lower annual EUI (88.2 to 36.9 kBtu/ft²·yr)</span><span class="go">Read the case study →</span></span></a><a class="pcard big" href="projects/if-walls-could-talk/" data-reveal><span class="pc-img"><img src="projects/if-walls-could-talk/cover.jpg" alt="" width="1271" height="1123" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Building systems</span><b>If These Walls Could Talk</b><span class="pc-sub">A thermal and moisture study of a brick cavity wall at Richards Hall, Northeastern University, using thermography, hand calculations and Building Science Advisor to compare two retrofits.</span><span class="pc-stat"><b>U-0.072</b> calculated wall U-factor vs U-0.080 code maximum</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
+    </div>
+  </section>
+
 
   <!-- CHAPTER I -->
   <section class="chapter" id="bangalore">
@@ -500,24 +537,12 @@
         </div>
         <div>
           <h2 data-reveal class="split">Into practice</h2>
-          <p data-reveal style="--d:200ms">An internship took my studio work onto real projects, and my undergraduate portfolio collects the best of those five years.</p>
+          <p data-reveal style="--d:200ms">Five years of studio projects in Bangalore, and an internship that took that work onto real sites.</p>
         </div>
       </div>
       <div class="ch-body">
-        <div class="side"><span class="mono">Documents</span></div>
-        <div data-stagger>
-          <!-- EDIT: add your internship role, dates and one line about what you worked on -->
-          <button type="button" class="doc" data-reveal data-doc="internship-bgdpl">
-            <img class="doc-thumb" src="docs/internship-bgdpl/thumb.jpg" alt="" loading="lazy" width="640" height="452">
-            <div><span class="mono">Internship · Professional Practice · 52 pages</span><h3>BGDPL (CNTC India)</h3><p>Building and material studies, mood boards, architectural details, and the projects ZenX, Carnoustie, Millers’ Office and Rustic Ridges.</p></div>
-            <span class="go">Read ↗</span>
-          </button>
-          <button type="button" class="doc" data-reveal data-doc="undergrad-portfolio">
-            <img class="doc-thumb" src="docs/undergrad-portfolio/thumb.jpg" alt="" loading="lazy" width="640" height="320">
-            <div><span class="mono">Architecture portfolio · 2024–25 · 25 pages</span><h3>Undergraduate portfolio</h3><p>Site studies and ideation, 3D models, a study of pods, architectural case studies, and my creative work.</p></div>
-            <span class="go">Read ↗</span>
-          </button>
-        </div>
+        <div class="side"><span class="mono">Case studies</span></div>
+        <div class="pcards"><!-- build:cards @studio --><a class="pcard" href="projects/studio-anvaya/" data-reveal><span class="pc-img"><img src="projects/studio-anvaya/cover.jpg" alt="" width="1600" height="873" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Design</span><b>Anvaya Youth Center</b><span class="pc-sub">A five-level youth centre by Allalasandra Lake in Yelahanka, Bengaluru, built around cascading terraces.</span><span class="pc-stat"><b>5</b> levels of cascading terraces</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/studio-mrittika/" data-reveal><span class="pc-img"><img src="projects/studio-mrittika/cover.jpg" alt="" width="1600" height="998" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Design</span><b>Mrittika</b><span class="pc-sub">A pottery and sculptural experience centre in Ramanagara, Karnataka, designed as my undergraduate thesis.</span><span class="pc-stat"><b>5</b> blocks on the site</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/studio-sattvana/" data-reveal><span class="pc-img"><img src="projects/studio-sattvana/cover.jpg" alt="" width="1344" height="768" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Design</span><b>Sattvana Resort</b><span class="pc-sub">An ideation-stage study of three pod types to find the one best suited to a resort in an island setting.</span><span class="pc-stat"><b>3</b> pod types studied</span><span class="go">Read the case study →</span></span></a><!-- /build --><!-- build:cards internship-bgdpl --><a class="pcard" href="projects/internship-bgdpl/" data-reveal><span class="pc-img"><img src="projects/internship-bgdpl/cover.jpg" alt="" width="1599" height="715" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Practice</span><b>Professional Practice at BGDPL</b><span class="pc-sub">My architectural internship at BGDPL (CNTC India), from site studies of a 50-storey tower to pod resorts, an office renovation and a resort masterplan.</span><span class="pc-stat"><b>50</b> floors in the tower I studied on site</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
       </div>
     </div>
   </section>
@@ -566,37 +591,23 @@
       <div class="steps">
         <div class="step">
           <div class="verb" data-reveal><span class="mono">Step 1</span><h3>Read the climate</h3><p>Before any form, understand the weather, water and site.</p></div>
-          <ul class="files" data-stagger>
-            <li data-reveal><button type="button" class="file" data-doc="bangalore-weather"><img src="docs/bangalore-weather/thumb.jpg" alt="" loading="lazy"><span class="ft">Bangalore Weather Analysis</span><span class="fd">The city I lived in for 22 years, read two ways: how its seasons feel, and what Climate Consultant data says. It ends in seven design strategies, from overhangs and courtyards to rainwater harvesting.</span><span class="fm">1 sheet · Read ↗</span></button></li>
-            <li data-reveal><button type="button" class="file" data-doc="beyond-water-sites"><img src="docs/beyond-water-sites/thumb.jpg" alt="" loading="lazy"><span class="ft">Beyond Buildings and Water</span><span class="fd">My personal water footprint (1,033 m³ a year), then a fixture-by-fixture estimate of water use in my 1956 apartment building.</span><span class="fm">20 pages · Read ↗</span></button></li>
-          </ul>
+          <div class="pcards"><!-- build:cards bangalore-weather,beyond-water-sites --><a class="pcard" href="projects/bangalore-weather/" data-reveal><span class="pc-img"><img src="projects/bangalore-weather/cover.jpg" alt="" width="800" height="1000" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Climate &amp; water</span><b>Bangalore Climate: Experience, Data and Design Strategies</b><span class="pc-sub">A climate study of my home city that sets lived experience against Climate Consultant data and turns both into passive design strategies.</span><span class="pc-stat"><b>22 years</b> I lived in Bangalore before my master&#x27;s</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/beyond-water-sites/" data-reveal><span class="pc-img"><img src="projects/beyond-water-sites/runoff-comparison.jpg" alt="" width="1189" height="779" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Climate &amp; water</span><b>Beyond Buildings and Water</b><span class="pc-sub">A study of water at three scales: my personal footprint, my home&#x27;s fixtures, and stormwater on Northeastern University&#x27;s West Village campus.</span><span class="pc-stat"><b>1,033 m³</b> my yearly water footprint</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
         </div>
         <div class="step">
           <div class="verb" data-reveal><span class="mono">Step 2</span><h3>Model the energy</h3><p>Simulate it before it's built.</p></div>
-          <ul class="files" data-stagger>
-            <li data-reveal><button type="button" class="file" data-doc="equest-k12"><img src="docs/equest-k12/thumb.jpg" alt="" loading="lazy"><span class="ft">eQUEST: Cognitive and Learning Center</span><span class="fd">A 10,000 ft² two-storey school in Litchfield, Connecticut, modelled in eQUEST against an ENERGY STAR target of 53.8 kBtu/ft²·yr. I tested passive and envelope strategies to cut energy use by at least 10%.</span><span class="fm">13 pages · Read ↗</span></button></li>
-          </ul>
+          <div class="pcards"><!-- build:cards equest-k12 --><a class="pcard" href="projects/equest-k12/" data-reveal><span class="pc-img"><img src="projects/equest-k12/cover.jpg" alt="" width="744" height="379" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Energy</span><b>eQUEST Energy Modelling for a K-12 School</b><span class="pc-sub">Three rounds of eQUEST simulation for a Connecticut school, from setting an ENERGY STAR target to testing envelope, geometry, lighting and equipment strategies under the ASHRAE 209 modelling cycle.</span><span class="pc-stat"><b>53.8</b> kBtu/ft²·yr ENERGY STAR site EUI target</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
         </div>
         <div class="step">
           <div class="verb" data-reveal><span class="mono">Step 3</span><h3>Integrate the systems</h3><p>Structure, skin and services, drawn as one.</p></div>
-          <ul class="files" data-stagger>
-            <li data-reveal><button type="button" class="file" data-doc="integrated-systems"><img src="docs/integrated-systems/thumb.jpg" alt="" loading="lazy"><span class="ft">Integrated Systems Section: Seattle School</span><span class="fd">A south-facing classroom wing where the butterfly roof, overhangs, skylights, natural ventilation, rain gardens and rooftop PV work together. Annual EUI drops from 88.2 to 36.9 kBtu/ft²·yr.</span><span class="fm">2 pages · Read ↗</span></button></li>
-            <li data-reveal><button type="button" class="file" data-doc="if-walls-could-talk"><img src="docs/if-walls-could-talk/thumb.jpg" alt="" loading="lazy"><span class="ft">If These Walls Could Talk</span><span class="fd">Thermal and moisture performance of an exterior wall at Richards Hall, Northeastern, using infrared thermography, hand calculations and the DOE Building Science Advisor. It ends with an exterior insulation retrofit.</span><span class="fm">11 pages · Read ↗</span></button></li>
-            <li data-reveal><button type="button" class="file" data-doc="revit-project"><img src="docs/revit-project/thumb.jpg" alt="" loading="lazy"><span class="ft">Revit Project: Courtyard Villa</span><span class="fd">A contemporary floating villa around a private courtyard, joining indoor comfort and outdoor living through transparency, shading and clean geometry.</span><span class="fm">8 pages · Read ↗</span></button></li>
-          </ul>
+          <div class="pcards"><!-- build:cards integrated-systems,if-walls-could-talk,revit-project --><a class="pcard" href="projects/integrated-systems/" data-reveal><span class="pc-img"><img src="projects/integrated-systems/cover.jpg" alt="" width="1600" height="557" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Building systems</span><b>Integrated Systems Section: Seattle School</b><span class="pc-sub">A single building section for a south-facing classroom wing that brings daylight, passive solar heating, ventilation, acoustics, rainwater and solar power together in one design.</span><span class="pc-stat"><b>58%</b> lower annual EUI (88.2 to 36.9 kBtu/ft²·yr)</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/if-walls-could-talk/" data-reveal><span class="pc-img"><img src="projects/if-walls-could-talk/cover.jpg" alt="" width="1271" height="1123" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Building systems</span><b>If These Walls Could Talk</b><span class="pc-sub">A thermal and moisture study of a brick cavity wall at Richards Hall, Northeastern University, using thermography, hand calculations and Building Science Advisor to compare two retrofits.</span><span class="pc-stat"><b>U-0.072</b> calculated wall U-factor vs U-0.080 code maximum</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/revit-project/" data-reveal><span class="pc-img"><img src="projects/revit-project/courtyard-villa-day.jpg" alt="" width="1026" height="714" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Design</span><b>Revit Project: Courtyard Villa</b><span class="pc-sub">A two-story contemporary villa modeled in Revit around a private courtyard, then reinterpreted with AI image generation for advanced visualization.</span><span class="pc-stat"><b>2</b> floors, plus a roof with solar panels</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
         </div>
         <div class="step">
           <div class="verb" data-reveal><span class="mono">Step 4</span><h3>Ask the people inside</h3><p>A building is only as good as it feels to use.</p></div>
-          <ul class="files" data-stagger>
-            <li data-reveal><button type="button" class="file" data-doc="poe-ieq-survey"><img src="docs/poe-ieq-survey/thumb.jpg" alt="" loading="lazy"><span class="ft">Post-Occupancy Evaluation: IEQ Self Survey</span><span class="fd">A seven-day study of my own thermal comfort: 35 surveys across home, gym, Snell Library and shops, matched against more than 1,150 temperature readings and ASHRAE 55.</span><span class="fm">4 pages · Read ↗</span></button></li>
-          </ul>
+          <div class="pcards"><!-- build:cards poe-ieq-survey --><a class="pcard" href="projects/poe-ieq-survey/" data-reveal><span class="pc-img"><img src="projects/poe-ieq-survey/sensation-vs-temperature.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Comfort &amp; people</span><b>Post Occupancy Evaluation: IEQ Self Survey</b><span class="pc-sub">A seven-day personal thermal comfort study that compares how warm I felt with what a datalogger measured, and tests the result against ASHRAE 55.</span><span class="pc-stat"><b>35</b> self-surveys over seven days</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
         </div>
         <div class="step">
           <div class="verb" data-reveal><span class="mono">Step 5</span><h3>Learn from the best</h3><p>Standards and the buildings that set them.</p></div>
-          <ul class="files" data-stagger>
-            <li data-reveal><button type="button" class="file" data-doc="leed-paper"><img src="docs/leed-paper/thumb.jpg" alt="" loading="lazy"><span class="ft">LEED v5 EQc2: Occupant Experience</span><span class="fd">A research paper on how the new credit brings thermal comfort, daylight, views, acoustics, biophilic design and occupant control into one framework.</span><span class="fm">20 pages · Read ↗</span></button></li>
-            <li data-reveal><button type="button" class="file" data-doc="rmi-case-study"><img src="docs/rmi-case-study/thumb.jpg" alt="" loading="lazy"><span class="ft">Passive Design: RMI Innovation Center</span><span class="fd">A 15,600 ft² net-zero office in Basalt, Colorado that needs no conventional heating, analysed with the CBE Clima Tool and Climate Consultant.</span><span class="fm">2 pages · Read ↗</span></button></li>
-          </ul>
+          <div class="pcards"><!-- build:cards leed-paper,rmi-case-study --><a class="pcard" href="projects/leed-paper/" data-reveal><span class="pc-img"></span><span class="pc-body"><span class="mono">Comfort &amp; people</span><b>LEED v5 EQc2: Occupant Experience</b><span class="pc-sub">A research paper on LEED v5&#x27;s new Occupant Experience credit: how it works, how it reweights indoor environmental quality, and why design documentation alone may not deliver comfort.</span><span class="pc-stat"><b>5</b> options combined in one credit</span><span class="go">Read the case study →</span></span></a><a class="pcard" href="projects/rmi-case-study/" data-reveal><span class="pc-img"><img src="projects/rmi-case-study/cover.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></span><span class="pc-body"><span class="mono">Energy</span><b>The Rocky Mountain Institute (RMI) Innovation Center: Passive Design Case Study</b><span class="pc-sub">An analysis of how a net-zero office in the Colorado mountains heats itself with sun, insulation and airtightness instead of a furnace.</span><span class="pc-stat"><b>52%</b> window-to-wall ratio on the south facade</span><span class="go">Read the case study →</span></span></a><!-- /build --></div>
         </div>
       </div>
 
@@ -683,26 +694,7 @@
         <p class="d" id="lbDesc"></p>
         <span class="mono" id="lbCount"></span>
         <div class="lb-thumbs" id="lbThumbs"></div>
-        <button type="button" class="lb-more" id="lbMore">See it in my full portfolio ↗</button>
       </div>
-    </div>
-  </dialog>
-
-  <dialog id="reader" aria-labelledby="rdTitle">
-    <button type="button" class="rd-close" id="rdClose" aria-label="Close">✕</button>
-    <div class="rd-shell">
-      <aside class="rd-side">
-        <span class="mono" id="rdKicker"></span>
-        <h2 id="rdTitle"></h2>
-        <p id="rdDesc"></p>
-        <div class="rd-actions">
-          <button type="button" id="rdZoom">Zoom in</button>
-          <button type="button" id="rdTop">Back to page 1</button>
-        </div>
-        <span class="mono" id="rdCount"></span>
-        <div class="rd-meter"><i id="rdMeter"></i></div>
-      </aside>
-      <div class="rd-pages" id="rdPages"></div>
     </div>
   </dialog>
 
@@ -1092,63 +1084,6 @@
   var sx = null;
   $('lbStage').addEventListener('pointerdown', function (e) { sx = e.clientX; });
   $('lbStage').addEventListener('pointerup', function (e) { if (sx === null) return; var dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) show(cur.i + (dx < 0 ? 1 : -1)); });
-
-  /* ---------- reader: every project page shown on the site ---------- */
-  var PAGES = {"bangalore-weather":{"pages":1,"sizes":[[2329,3600]]},"beyond-water-sites":{"pages":20,"sizes":[[1274,1800],[1274,1800],[1274,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1391,1800],[1274,1800],[1274,1800],[1274,1800]]},"equest-k12":{"pages":13,"sizes":[[1391,1800]]},"if-walls-could-talk":{"pages":11,"sizes":[[1274,1800]]},"integrated-systems":{"pages":2,"sizes":[[1800,1012]]},"internship-bgdpl":{"pages":52,"sizes":[[1800,1271]]},"leed-paper":{"pages":20,"sizes":[[1274,1800]]},"poe-ieq-survey":{"pages":4,"sizes":[[1391,1800]]},"revit-project":{"pages":8,"sizes":[[1800,1012]]},"rmi-case-study":{"pages":2,"sizes":[[1391,1800]]},"undergrad-portfolio":{"pages":25,"sizes":[[1800,900]]}};
-  var DOCS = {
-    'bangalore-weather': ['Step 1 · Read the climate', 'Bangalore Weather Analysis', 'The city I lived in for 22 years, read through lived experience and Climate Consultant data, ending in seven design strategies.'],
-    'beyond-water-sites': ['Step 1 · Read the climate', 'Beyond Buildings and Water', 'My personal water footprint, then a fixture-by-fixture estimate of water use in a 1956 apartment building.'],
-    'equest-k12': ['Step 2 · Model the energy', 'eQUEST: Cognitive and Learning Center', 'SBSY 5250 Building Performance Simulation. A 10,000 ft² school in Litchfield, Connecticut, tested against an ENERGY STAR target.'],
-    'integrated-systems': ['Step 3 · Integrate the systems', 'Integrated Systems Section: Seattle School', 'Butterfly roof, overhangs, skylights, natural ventilation, rain gardens and PV in one section. EUI 88.2 → 36.9 kBtu/ft²·yr.'],
-    'if-walls-could-talk': ['Step 3 · Integrate the systems', 'If These Walls Could Talk', 'Infrared thermography and moisture analysis of a Richards Hall wall at Northeastern, with a retrofit recommendation.'],
-    'revit-project': ['Step 3 · Integrate the systems', 'Revit Project: Courtyard Villa', 'A floating villa around a private courtyard, modelled in Revit.'],
-    'poe-ieq-survey': ['Step 4 · Ask the people inside', 'Post-Occupancy Evaluation: IEQ Self Survey', 'Seven days, 35 surveys and 1,150+ temperature readings, compared with ASHRAE 55.'],
-    'leed-paper': ['Step 5 · Learn from the best', 'LEED v5 EQc2: Occupant Experience', 'SBSY 5100 research paper, December 2025.'],
-    'rmi-case-study': ['Step 5 · Learn from the best', 'Passive Design: RMI Innovation Center', 'A net-zero office in Basalt, Colorado with no conventional heating.'],
-    'internship-bgdpl': ['Internship · Professional Practice', 'BGDPL (CNTC India)', 'Building and material studies, mood boards, details, and the projects ZenX, Carnoustie, Millers’ Office and Rustic Ridges.'],
-    'undergrad-portfolio': ['Architecture portfolio · 2024–25', 'Undergraduate portfolio', 'Site studies, 3D models, pods, case studies, and my creative work.']
-  };
-  var reader = $('reader'), rdPages = $('rdPages'), pageIO = null;
-  function pad(x) { return x < 10 ? '0' + x : '' + x; }
-  function openDoc(key) {
-    var meta = DOCS[key], info = PAGES[key];
-    $('rdKicker').textContent = meta[0]; $('rdTitle').textContent = meta[1]; $('rdDesc').textContent = meta[2];
-    rdPages.textContent = ''; rdPages.classList.remove('zoomed'); $('rdZoom').textContent = 'Zoom in';
-    if (pageIO) pageIO.disconnect();
-    pageIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var k = +e.target.dataset.n;
-        $('rdCount').textContent = 'Page ' + k + ' of ' + info.pages;
-        $('rdMeter').style.width = (k / info.pages * 100) + '%';
-      });
-    }, { root: rdPages, threshold: 0.4 });
-    for (var i = 1; i <= info.pages; i++) {
-      var sz = info.sizes[Math.min(i - 1, info.sizes.length - 1)], wide = sz[0] > sz[1];
-      var page = document.createElement('figure'); page.className = 'rd-page'; page.dataset.n = i;
-      page.style.setProperty('--w', (key === 'bangalore-weather' ? 1100 : wide ? 1320 : 880) + 'px');
-      var img = document.createElement('img');
-      img.src = 'docs/' + key + '/p-' + pad(i) + '.jpg'; img.width = sz[0]; img.height = sz[1];
-      img.alt = meta[1] + ', page ' + i; img.loading = i < 3 ? 'eager' : 'lazy'; img.decoding = 'async';
-      img.addEventListener('click', toggleZoom);
-      var pn = document.createElement('figcaption'); pn.className = 'pn'; pn.textContent = pad(i);
-      page.appendChild(pn); page.appendChild(img); rdPages.appendChild(page); pageIO.observe(page);
-    }
-    $('rdCount').textContent = 'Page 1 of ' + info.pages; $('rdMeter').style.width = (100 / info.pages) + '%';
-    if (reader.showModal) reader.showModal(); else reader.setAttribute('open', '');
-    rdPages.scrollTop = 0;
-  }
-  function toggleZoom(e) {
-    var target = e && e.target && e.target.closest ? e.target.closest('.rd-page') : null;
-    var z = rdPages.classList.toggle('zoomed');
-    $('rdZoom').textContent = z ? 'Fit to screen' : 'Zoom in';
-    if (target) target.scrollIntoView({ block: 'start' });
-  }
-  $('rdZoom').addEventListener('click', function () { toggleZoom(); });
-  $('rdTop').addEventListener('click', function () { rdPages.scrollTo({ top: 0, left: 0 }); });
-  $('rdClose').addEventListener('click', function () { if (reader.close) reader.close(); else reader.removeAttribute('open'); });
-  document.querySelectorAll('[data-doc]').forEach(function (b) { b.addEventListener('click', function () { openDoc(b.dataset.doc); }); });
-  $('lbMore').addEventListener('click', function () { closeGallery(); openDoc('undergrad-portfolio'); });
 
   // banner parallax
   var banner = document.querySelector('.banner img');
