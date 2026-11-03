@@ -1,19 +1,24 @@
-/* Case-study pages. Same palette and type as the home page: limewash, sage, moss and sunlight.
+/* Case-study pages, in the home page's Japanese-architecture palette: washi paper, sumi ink, hinoki wood,
+   indigo, and vermilion as the single accent. Token names are kept from the earlier design:
+   limewash = washi, plaster = raised paper, charcoal = sumi, sage = hinoki, moss = indigo, sun = vermilion.
    Layout: a project "data sheet" opening, a full-bleed cover, then a reading column with a sticky contents rail;
    figures break out of the text measure, numbers count up, every figure opens large. */
 :root {
-  --limewash: #efebe3; --plaster: #f8f6f1; --charcoal: #24261f; --ash: #6b6d62;
-  --sage: #8f9479; --moss: #4d5a3c; --sun: #e2a63b; --line: #d8d2c5;
-  --display: "Cormorant Garamond", "EB Garamond", Garamond, Georgia, serif;
-  --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --limewash: #f5f2eb; --plaster: #fbf9f4; --charcoal: #1f1e1b; --ash: #6d685f;
+  --sage: #c9b28a; --moss: #2f4b63; --sun: #b4432d; --line: #ddd6c8; --hinoki: #d8c29d;
+  --display: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
+  --body: "Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif;
   --mono: "DM Mono", ui-monospace, Consolas, monospace;
-  --ease: cubic-bezier(.2, .75, .2, 1);
+  --ease: cubic-bezier(.22, .7, .2, 1);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --limewash: #171813; --plaster: #1f211b; --charcoal: #ebe6da; --ash: #a6a796; --sage: #7f866a; --moss: #b6c49a; --sun: #f0b955; --line: #34362d; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --limewash: #151513; --plaster: #1d1c19; --charcoal: #ece7dc; --ash: #a39d91; --sage: #8f7b5c; --moss: #93b2cc; --sun: #e06e52; --line: #312f2a; --hinoki: #8f7b5c; color-scheme: dark; }
 }
-:root[data-theme="dark"] { --limewash: #171813; --plaster: #1f211b; --charcoal: #ebe6da; --ash: #a6a796; --sage: #7f866a; --moss: #b6c49a; --sun: #f0b955; --line: #34362d; color-scheme: dark; }
+:root[data-theme="dark"] { --limewash: #151513; --plaster: #1d1c19; --charcoal: #ece7dc; --ash: #a39d91; --sage: #8f7b5c; --moss: #93b2cc; --sun: #e06e52; --line: #312f2a; --hinoki: #8f7b5c; color-scheme: dark; }
+.seal { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: 12px; border-radius: 3px; background: var(--sun); color: #fbf4ea; font: 600 13px/1 var(--display); font-style: normal; vertical-align: middle; }
+.cs-cover { border-block: 9px solid var(--hinoki); }
+.cs-cover.plain { border-block: 0; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -23,7 +28,7 @@ a { color: var(--moss); text-underline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; border-radius: 4px; }
 img { max-width: 100%; }
 button { font: inherit; }
-h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.22; margin: 0; text-wrap: balance; letter-spacing: .01em; }
 p { margin: 0; }
 .mono { font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: var(--ash); }
 .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
@@ -34,7 +39,7 @@ p { margin: 0; }
 /* top bar */
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--limewash) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
-.sig { font-family: var(--display); font-style: italic; font-size: 24px; text-decoration: none; color: var(--charcoal); }
+.sig { display: inline-flex; align-items: center; font: 500 18px var(--display); letter-spacing: .04em; text-decoration: none; color: var(--charcoal); }
 .bar nav { display: flex; gap: 22px; }
 .bar nav a { font-size: 14px; color: var(--ash); text-decoration: none; }
 .bar nav a:hover { color: var(--charcoal); }
@@ -46,7 +51,7 @@ p { margin: 0; }
 .back { display: inline-flex; gap: 8px; align-items: center; font: 13px var(--mono); color: var(--ash); text-decoration: none; transition: color .3s, gap .4s var(--ease); }
 .back:hover { color: var(--moss); gap: 12px; }
 .cs-hero .kicker { margin-top: 36px; }
-.cs-hero h1 { font-size: clamp(46px, 7.6vw, 104px); font-weight: 400; letter-spacing: -.01em; max-width: 14ch; margin-top: 14px; }
+.cs-hero h1 { font-size: clamp(40px, 6.4vw, 86px); font-weight: 400; line-height: 1.15; max-width: 16ch; margin-top: 14px; }
 .cs-hero .sub { font-size: clamp(19px, 2vw, 23px); max-width: 34em; margin-top: 24px; color: var(--charcoal); }
 .cs-cover { position: relative; margin: 56px 0 0; height: min(76vh, 760px); overflow: hidden; background: var(--line); }
 .cs-cover img { position: absolute; inset: -6% 0 0; width: 100%; height: 112%; object-fit: cover; }
@@ -104,7 +109,7 @@ article { min-width: 0; max-width: 900px; }
 .fig figcaption { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--ash); max-width: 60ch; }
 .fig figcaption::before { content: attr(data-n); font: 12px var(--mono); color: var(--sun); margin-right: 8px; }
 
-.take { margin-top: 88px; padding: 36px 36px 32px; border-radius: 6px; background: var(--charcoal); color: var(--limewash); }
+.take { margin-top: 88px; padding: 36px 36px 32px; border-radius: 2px; background: #2f4b63; color: #f3efe6; border-top: 9px solid var(--hinoki); }
 .take h2 { font-size: clamp(30px, 3.6vw, 42px); font-weight: 400; font-style: italic; }
 .take ul { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
 .take li { position: relative; padding-left: 28px; font-size: 18px; }
