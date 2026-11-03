@@ -4,9 +4,9 @@
    Layout: a project "data sheet" opening, a full-bleed cover, then a reading column with a sticky contents rail;
    figures break out of the text measure, numbers count up, every figure opens large. */
 :root {
-  --limewash: #f7f4ef; --plaster: #fdfbf7; --charcoal: #4a453e; --ash: #8d867b;
-  --sage: #b8c4ab; --moss: #6f8c9b; --sun: #b9975e; --line: #e7e0d4; --hinoki: #e4d9c6;
-  --blush: #edd9cf; --mist: #dde7e8;
+  --limewash: #fdf8f0; --plaster: #ffffff; --charcoal: #2f2a35; --ash: #6c6370;
+  --sage: #6fae3e; --moss: #3556c8; --sun: #e65a41; --line: #eadccb; --hinoki: #f4d7a1;
+  --blush: #f7b9c7; --mist: #9fd8f2; --gold: #f0a92b;
   --display: "Cormorant Garamond", "Shippori Mincho", Garamond, Georgia, serif;
   --body: "Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif;
   --mono: "Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif;
@@ -14,13 +14,16 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --limewash: #26251f; --plaster: #2d2c26; --charcoal: #ebe5da; --ash: #aaa295; --sage: #7d8a70; --moss: #a9c2cc; --sun: #d3b67e; --line: #3b3932; --hinoki: #4a4538; --blush: #4a3d38; --mist: #33403f; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --limewash: #211d27; --plaster: #2b2632; --charcoal: #f6efe6; --ash: #c3b7c1; --sage: #8fd15a; --moss: #9db2ff; --sun: #ff8a6e; --line: #3d3546; --hinoki: #6b5636; --blush: #b96b82; --mist: #4f9cc0; --gold: #ffc552; color-scheme: dark; }
 }
-:root[data-theme="dark"] { --limewash: #26251f; --plaster: #2d2c26; --charcoal: #ebe5da; --ash: #aaa295; --sage: #7d8a70; --moss: #a9c2cc; --sun: #d3b67e; --line: #3b3932; --hinoki: #4a4538; --blush: #4a3d38; --mist: #33403f; color-scheme: dark; }
+:root[data-theme="dark"] { --limewash: #211d27; --plaster: #2b2632; --charcoal: #f6efe6; --ash: #c3b7c1; --sage: #8fd15a; --moss: #9db2ff; --sun: #ff8a6e; --line: #3d3546; --hinoki: #6b5636; --blush: #b96b82; --mist: #4f9cc0; --gold: #ffc552; color-scheme: dark; }
 .seal { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-right: 12px; border-radius: 50%; border: 1px solid var(--sun); color: var(--sun); font: italic 400 15px/1 var(--display); vertical-align: middle; }
 body { font-weight: 300; }
 .mono { font-weight: 400; font-size: 11.5px !important; letter-spacing: .22em !important; text-transform: uppercase; }
-.cs-hero { background: radial-gradient(60% 80% at 90% 10%, color-mix(in srgb, var(--blush) 60%, transparent), transparent 70%), radial-gradient(50% 70% at 0% 100%, color-mix(in srgb, var(--mist) 70%, transparent), transparent 70%); }
+.cs-hero { background: radial-gradient(55% 80% at 92% 8%, color-mix(in srgb, var(--blush) 95%, transparent), transparent 70%), radial-gradient(40% 60% at 55% 0%, color-mix(in srgb, var(--gold) 40%, transparent), transparent 70%), radial-gradient(50% 70% at 0% 100%, color-mix(in srgb, var(--mist) 85%, transparent), transparent 70%); }
+.stat { background: color-mix(in srgb, var(--blush) 22%, var(--plaster)); border-color: color-mix(in srgb, var(--blush) 60%, transparent); }
+.stat b { color: var(--sun); }
+.cs-sec .num { color: var(--sun); }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -111,7 +114,8 @@ article { min-width: 0; max-width: 900px; }
 .fig figcaption { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--ash); max-width: 60ch; }
 .fig figcaption::before { content: attr(data-n); font: 12px var(--mono); color: var(--sun); margin-right: 8px; }
 
-.take { margin-top: 88px; padding: 40px 40px 36px; border-radius: 2px; background: linear-gradient(135deg, var(--mist), color-mix(in srgb, var(--sage) 45%, var(--limewash))); color: var(--charcoal); border-top: 1px solid var(--sun); }
+.take { margin-top: 88px; padding: 40px 40px 36px; border-radius: 2px; background: linear-gradient(120deg, #2f8a5a, #2f9cbf); color: #fdf8f0; border-top: 0; }
+.take li::before { background: #ffd36b; }
 .take h2 { font-weight: 300; }
 .take h2 { font-size: clamp(30px, 3.6vw, 42px); font-weight: 400; font-style: italic; }
 .take ul { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
