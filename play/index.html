@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Net Zero, Your Move · Namita Deshpande</title>
+<meta name="description" content="A small game about sustainable buildings: pick strategies on a budget and try to reach net zero in Bangalore or Boston.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/case.css">
+<script>if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');</script>
+<style>
+  /* Layout: a two-column game board. Left: the building section that reacts to your choices, with live meters and the rating.
+     Right: strategy cards grouped like a design process. The page's own palette adds a game-board green and coin gold. */
+  :root { --board: #2f3a28; --board-ink: #f2efe6; --coin: #e2a63b; --good: #4f8a4a; --warn: #b5562f; }
+  .g-intro { padding-block: 48px 28px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 48px; align-items: end; }
+  .g-intro h1 { font-size: clamp(48px, 8vw, 104px); font-weight: 400; margin-top: 14px; }
+  .g-intro p.lead { font-size: 19px; margin-top: 18px; max-width: 34em; }
+  .how { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 6px; font-size: 15px; color: var(--ash); }
+  .how li::before { content: "→ "; color: var(--coin); }
+  .missions { padding: 22px; border-radius: 6px; background: var(--plaster); border: 1px solid var(--line); }
+  .missions h2 { font-size: 26px; font-style: italic; font-weight: 500; }
+  .missions ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+  .missions li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 15px; }
+  .missions .box { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--sage); display: grid; place-items: center; transition: background-color .4s, border-color .4s; }
+  .missions li.done .box { background: var(--good); border-color: var(--good); }
+  .missions li.done .box::after { content: ""; width: 9px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; rotate: -45deg; translate: 0 -1px; }
+  .missions li.done span:last-child { text-decoration: line-through; color: var(--ash); }
+
+  .cities { display: inline-flex; gap: 6px; margin-top: 22px; padding: 5px; border-radius: 999px; border: 1px solid var(--line); background: var(--plaster); }
+  .cities button { border: 0; background: transparent; padding: 9px 18px; border-radius: 999px; cursor: pointer; color: var(--ash); font-weight: 500; transition: background-color .4s, color .4s; }
+  .cities button[aria-pressed="true"] { background: var(--charcoal); color: var(--limewash); }
+  .climate { margin-top: 10px; font-size: 14px; color: var(--ash); max-width: 40em; }
+
+  .board { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; padding-block: 12px 72px; align-items: start; }
+  .stage { position: sticky; top: 76px; display: grid; gap: 14px; }
+  .scene { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--plaster); }
+  .scene svg { display: block; width: 100%; height: auto; }
+  #confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .toast { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 12px 14px; border-radius: 4px; background: rgba(28, 30, 24, .88); color: #f2efe6; font-size: 14px; line-height: 1.45; opacity: 0; translate: 0 10px; transition: opacity .4s, translate .4s var(--ease); pointer-events: none; }
+  .toast.show { opacity: 1; translate: 0 0; }
+  .toast b { color: #f0b955; font-weight: 600; }
+
+  .dash { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 18px; border-radius: 6px; background: var(--board); color: var(--board-ink); }
+  .ring { position: relative; width: 150px; height: 150px; }
+  .ring svg { width: 100%; height: 100%; rotate: -90deg; }
+  .ring circle { fill: none; stroke-width: 12; }
+  .ring .track { stroke: rgba(255,255,255,.12); }
+  .ring .val { stroke: var(--coin); stroke-linecap: round; transition: stroke-dashoffset .8s var(--ease), stroke .5s; }
+  .ring .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .ring .mid b { font: 500 44px/1 var(--display); font-variant-numeric: tabular-nums; }
+  .ring .mid span { font: 12px var(--mono); letter-spacing: .05em; color: #c9d3b6; }
+  .rating { font: italic 500 26px/1.1 var(--display); color: #f0b955; margin-top: 2px; min-height: 1.1em; }
+  .meters { display: grid; gap: 11px; align-content: start; }
+  .meter { display: grid; gap: 5px; }
+  .meter .top { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; }
+  .meter .top span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; color: #f0b955; white-space: nowrap; }
+  .mbar { position: relative; height: 8px; border-radius: 4px; background: rgba(255,255,255,.12); overflow: hidden; }
+  .mbar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 4px; background: #a8c98a; transition: width .7s var(--ease), background-color .5s; }
+  .mbar.energy i { background: #e9a35a; }
+  .mbar.energy.zero i { background: #a8c98a; }
+  .coins { display: flex; flex-wrap: wrap; gap: 4px; }
+  .coins i { width: 12px; height: 12px; border-radius: 50%; background: var(--coin); box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); transition: opacity .3s, transform .3s; }
+  .coins i.spent { opacity: .2; transform: scale(.8); }
+  .dash .row2 { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center; border-top: 1px solid rgba(255,255,255,.12); padding-top: 12px; }
+  .dash .row2 .mono { color: #c9d3b6; }
+  .reset { border: 1px solid rgba(255,255,255,.3); background: transparent; color: var(--board-ink); padding: 7px 14px; border-radius: 999px; font: 13px var(--mono); cursor: pointer; }
+  .reset:hover { background: rgba(255,255,255,.08); }
+
+  .groups { display: grid; gap: 26px; }
+  .group h3 { font-size: 24px; font-style: italic; font-weight: 500; display: flex; align-items: baseline; gap: 10px; }
+  .group h3 .mono { font-style: normal; }
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+  .card { position: relative; display: grid; gap: 6px; align-content: start; text-align: left; padding: 14px 14px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--plaster); color: var(--charcoal); cursor: pointer; transition: transform .35s var(--ease), border-color .3s, background-color .3s, box-shadow .35s; }
+  .card:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 16px 26px -18px rgba(36,38,31,.5); border-color: var(--sage); }
+  .card[aria-pressed="true"] { background: color-mix(in srgb, var(--good) 14%, var(--plaster)); border-color: var(--good); }
+  .card[aria-pressed="true"]::after { content: ""; position: absolute; top: 12px; right: 12px; width: 18px; height: 18px; border-radius: 50%; background: var(--good); box-shadow: inset 0 0 0 4px var(--plaster); }
+  .card:disabled { opacity: .45; cursor: not-allowed; }
+  .card b { font-size: 15px; font-weight: 600; padding-right: 22px; line-height: 1.3; }
+  .card .cost { display: flex; gap: 3px; }
+  .card .cost i { width: 9px; height: 9px; border-radius: 50%; background: var(--coin); }
+  .card .cost em { font: normal 12px var(--mono); color: var(--ash); margin-left: 4px; }
+  .card .fit { font: 12px var(--mono); letter-spacing: .02em; }
+  .fit.hi { color: var(--good); } .fit.mid { color: var(--ash); } .fit.lo { color: var(--warn); }
+  .card.pop { animation: pop .45s var(--ease); }
+  @keyframes pop { 40% { transform: scale(1.04); } }
+
+  .note { padding-block: 0 80px; }
+  .note details { padding: 18px 22px; border-radius: 6px; border: 1px solid var(--line); background: var(--plaster); }
+  .note summary { cursor: pointer; font-weight: 600; }
+  .note p { margin-top: 10px; color: var(--ash); max-width: 64ch; }
+
+  /* scene parts */
+  .v { opacity: 0; transition: opacity .6s ease, transform .7s var(--ease); }
+  .v.on { opacity: 1; }
+  #v-shade.v { transform: scaleX(.2); transform-origin: 300px 200px; } #v-shade.on { transform: none; }
+  #v-pv.v, #v-pv2.v { transform: translateY(-14px); } #v-pv.on, #v-pv2.on { transform: none; }
+  .anim .spin { animation: rot 1.2s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+  .anim .flow { animation: flow 1.6s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -40; } }
+  .anim .drop { animation: fall 1.8s linear infinite; }
+  @keyframes fall { from { transform: translateY(-30px); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(60px); opacity: 0; } }
+  .heat { transition: opacity .6s; }
+
+  @media (max-width: 900px) {
+    .g-intro, .board { grid-template-columns: minmax(0, 1fr); }
+    .g-intro { padding-top: 28px; gap: 24px; }
+    .stage { position: relative; top: 0; }
+    .dash { grid-template-columns: 110px minmax(0, 1fr); }
+    .ring { width: 110px; height: 110px; }
+    .ring .mid b { font-size: 34px; }
+    .cards { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="sig" href="../">Namita</a>
+  <nav aria-label="Site"><a href="../#about">About</a><a href="../#work">Work</a><a href="../#studio">Creative work</a><a href="../#hello">Say hello</a></nav>
+  <button class="icon-btn" id="theme" aria-label="Switch light or dark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</div></header>
+
+<main>
+  <section class="wrap g-intro">
+    <div>
+      <a class="back" href="../#play">← Back to the portfolio</a>
+      <p class="mono" style="margin-top:28px">A small game about sustainable buildings</p>
+      <h1>Net zero, your move</h1>
+      <p class="lead">You have 20 coins to spend on a small two-storey building. Choose the strategies that matter most for its climate, and try to make it produce as much energy as it uses.</p>
+      <ul class="how"><li>Pick a city. Each climate rewards different moves.</li><li>Tap a card to add a strategy. Tap again to take it back.</li><li>Watch the building and the meters change. Reach a rating, then go for net zero.</li></ul>
+      <div class="cities" role="group" aria-label="City">
+        <button type="button" id="cBLR" aria-pressed="true">Bangalore</button>
+        <button type="button" id="cBOS" aria-pressed="false">Boston</button>
+      </div>
+      <p class="climate" id="climate"></p>
+    </div>
+    <aside class="missions" aria-labelledby="mTitle">
+      <h2 id="mTitle">Missions</h2>
+      <ul id="missions">
+        <li data-m="gold-blr"><span class="box"></span><span>Reach a Gold rating in Bangalore</span></li>
+        <li data-m="zero-bos"><span class="box"></span><span>Make a Boston building net zero</span></li>
+        <li data-m="plat"><span class="box"></span><span>Hit Platinum, 80 points or more, in either city</span></li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="wrap board">
+    <div class="stage">
+      <div class="scene">
+        <svg viewBox="0 0 640 400" id="scene" role="img" aria-label="Section through the building, showing the strategies you have chosen">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop id="skyA" offset="0" stop-color="#f3d9b0"/><stop id="skyB" offset="1" stop-color="#f7efe0"/></linearGradient>
+            <pattern id="brick" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="24" height="12" fill="#c98663"/><path d="M0 11.5h24M12 0v6M0 6h24M6 6v6M18 6v6" stroke="#a8684b" stroke-width="1"/></pattern>
+            <pattern id="timber" width="14" height="20" patternUnits="userSpaceOnUse"><rect width="14" height="20" fill="#d1a877"/><path d="M13.5 0v20" stroke="#b48a5c"/></pattern>
+            <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8l8-8" stroke="#8f8b80" stroke-width="1.2"/></pattern>
+            <radialGradient id="glow"><stop offset="0" stop-color="#ffe2a6" stop-opacity=".85"/><stop offset="1" stop-color="#ffe2a6" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="640" height="400" fill="url(#sky)"/>
+          <g id="sun"><circle cx="0" cy="0" r="30" fill="#f2b443"/><g class="spin"><path d="M0-44v-12M0 44v12M-44 0h-12M44 0h12M-31-31l-8-8M31 31l8 8M31-31l8-8M-31 31l-8 8" stroke="#f2b443" stroke-width="4" stroke-linecap="round"/></g></g>
+          <g id="cloud" opacity=".9"><ellipse cx="110" cy="70" rx="46" ry="18" fill="#fff"/><ellipse cx="140" cy="60" rx="30" ry="18" fill="#fff"/><ellipse cx="84" cy="64" rx="24" ry="14" fill="#fff"/></g>
+          <g id="rainfall" class="v"><path class="drop" d="M90 96v10M112 92v10M134 98v10M100 112v10M124 110v10" stroke="#6aa7c8" stroke-width="2.5" stroke-linecap="round"/></g>
+          <!-- heat arriving from the sun -->
+          <g class="heat" id="heat"><path class="flow" d="M500 110 L260 236 M512 128 L360 236" stroke="#e77b3c" stroke-width="3" stroke-dasharray="10 10" fill="none"/></g>
+          <!-- ground -->
+          <rect y="320" width="640" height="80" fill="#9a8a6c"/><rect y="320" width="640" height="8" fill="#7f9e5c"/>
+          <g id="v-grey" class="v"><path class="flow" d="M180 344h240v18H180Z" fill="none" stroke="#6aa7c8" stroke-width="3" stroke-dasharray="8 6"/></g>
+          <!-- building -->
+          <rect id="wall" x="170" y="172" width="260" height="148" fill="#d9d6cf"/>
+          <rect id="v-insul" class="v" x="166" y="168" width="268" height="156" fill="none" stroke="#f2e6a2" stroke-width="8"/>
+          <g id="v-led" class="v"><ellipse cx="300" cy="250" rx="130" ry="70" fill="url(#glow)"/></g>
+          <line x1="170" y1="246" x2="430" y2="246" stroke="#b9b5ac" stroke-width="4"/>
+          <g id="v-mass" class="v"><rect x="170" y="306" width="260" height="14" fill="url(#hatch)"/><rect x="170" y="240" width="260" height="10" fill="url(#hatch)"/></g>
+          <g id="windows"><rect x="196" y="190" width="58" height="44" fill="#a9c9d8"/><rect x="346" y="190" width="58" height="44" fill="#a9c9d8"/><rect x="196" y="262" width="58" height="44" fill="#a9c9d8"/><rect x="290" y="262" width="34" height="58" fill="#8a6a48"/></g>
+          <g id="v-glazing" class="v" stroke="#fff" stroke-width="2"><path d="M215 190v44M235 190v44M365 190v44M385 190v44M215 262v44M235 262v44"/></g>
+          <g id="v-shade" class="v"><rect x="186" y="182" width="78" height="7" fill="#7a6f5e"/><rect x="336" y="182" width="78" height="7" fill="#7a6f5e"/><rect x="186" y="254" width="78" height="7" fill="#7a6f5e"/></g>
+          <rect x="158" y="160" width="284" height="14" fill="#bdb6a8"/>
+          <g id="v-roof" class="v"><rect x="158" y="150" width="284" height="10" fill="#6f9a52"/><path d="M175 150q6-14 12 0M215 150q8-18 16 0M380 150q6-12 12 0M410 150q7-16 14 0" fill="#7fae5c"/></g>
+          <g id="v-pv" class="v"><g fill="#2c4a86" stroke="#9fb6e4" stroke-width="1.5"><path d="M200 146l44-24 10 6-44 24Z"/><path d="M262 146l44-24 10 6-44 24Z"/><path d="M324 146l44-24 10 6-44 24Z"/></g></g>
+          <g id="v-pv2" class="v"><path d="M430 210h60l-6 8h-54Z" fill="#2c4a86" stroke="#9fb6e4"/><path d="M470 218v102" stroke="#7a6f5e" stroke-width="3"/></g>
+          <g id="v-vent" class="v"><path class="flow" d="M120 212c40-10 60 10 100 0s60 10 100 0 60-10 100 0 50 10 80 0" stroke="#5b8fb0" stroke-width="3" fill="none" stroke-dasharray="14 10"/><g transform="translate(300 182)"><g class="spin"><path d="M-16 0h32M0-4v8" stroke="#555" stroke-width="3" stroke-linecap="round"/></g></g></g>
+          <g id="v-erv" class="v"><path class="flow" d="M180 182h240" stroke="#9d7bb0" stroke-width="5" stroke-dasharray="20 8"/></g>
+          <g id="v-hp" class="v"><rect x="446" y="286" width="44" height="34" rx="3" fill="#e9e6de" stroke="#9c978b"/><g transform="translate(468 303)"><circle r="11" fill="none" stroke="#9c978b"/><g class="spin"><path d="M-9 0h18M0-9v18" stroke="#6b675d" stroke-width="3"/></g></g></g>
+          <g id="v-rain" class="v"><path d="M158 168h-14v100" stroke="#8a8578" stroke-width="4" fill="none"/><rect x="118" y="262" width="40" height="58" rx="5" fill="#e9e6de" stroke="#8a8578"/><rect id="tankWater" x="121" y="290" width="34" height="28" fill="#6aa7c8"/></g>
+          <g id="v-fix" class="v"><path d="M372 270c8 12 12 18 12 24a12 12 0 0 1-24 0c0-6 4-12 12-24Z" fill="#6aa7c8"/></g>
+          <g id="v-garden" class="v"><path d="M40 320q8-30 16 0M60 320q10-40 20 0M500 320q8-26 16 0M530 320q10-36 20 0M560 320q8-24 16 0" fill="#5f8f4e"/><rect x="20" y="318" width="120" height="6" fill="#6aa7c8" opacity=".6"/></g>
+          <g id="v-recycled" class="v"><circle cx="400" cy="300" r="12" fill="#4f8a4a"/><path d="M394 300a6 6 0 1 1 6 6" stroke="#fff" stroke-width="2" fill="none"/></g>
+          <g id="v-orient" class="v"><text x="560" y="350" font-family="DM Mono, monospace" font-size="13" fill="#4d5a3c">N ↑</text></g>
+          <text id="label" x="20" y="384" font-family="DM Mono, monospace" font-size="12" fill="#4d4a40"></text>
+        </svg>
+        <canvas id="confetti" aria-hidden="true"></canvas>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="dash">
+        <div>
+          <div class="ring"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="62"/><circle class="val" id="ringVal" cx="75" cy="75" r="62"/></svg>
+            <div class="mid"><b id="score">0</b><span>of 110 points</span></div></div>
+          <div class="rating" id="rating"></div>
+        </div>
+        <div class="meters">
+          <div class="meter"><div class="top"><span>Net energy use</span><span id="mEnergy"></span></div><div class="mbar energy" id="bEnergy"><i></i></div></div>
+          <div class="meter"><div class="top"><span>Comfort inside</span><span id="mComfort"></span></div><div class="mbar"><i id="bComfort"></i></div></div>
+          <div class="meter"><div class="top"><span>Water saved</span><span id="mWater"></span></div><div class="mbar"><i id="bWater"></i></div></div>
+          <div class="meter"><div class="top"><span>Embodied carbon cut</span><span id="mCarbon"></span></div><div class="mbar"><i id="bCarbon"></i></div></div>
+        </div>
+        <div class="row2">
+          <div><span class="mono">Coins left: <b id="coinsLeft">20</b></span><div class="coins" id="coins"></div></div>
+          <button type="button" class="reset" id="reset">Start over</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section class="wrap note">
+    <details>
+      <summary>How the numbers work</summary>
+      <p>This is a teaching model, not an energy simulation. Each strategy cuts the building's energy use by a rough percentage that depends on the climate, the way the strategies I study tend to behave in Bangalore's mild, sunny climate and Boston's cold winters. Savings stack on what's left, so each extra measure matters a little less. Solar panels offset energy instead of reducing it. The points loosely follow how LEED rewards energy, water, materials and indoor quality, with Certified at 40, Silver at 50, Gold at 60 and Platinum at 80.</p>
+      <p>For the real thing, see my <a href="../projects/equest-k12/">eQUEST energy model</a> and my <a href="../projects/integrated-systems/">integrated systems section</a>.</p>
+    </details>
+  </section>
+</main>
+<footer><div class="wrap"><span class="mono">© <span id="yr">2026</span> Namita Deshpande</span><a class="mono" href="../">Back to the portfolio</a></div></footer>
+
+<script>
+(function () {
+  var root = document.documentElement, motion = root.classList.contains('anim');
+  function $(id) { return document.getElementById(id); }
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+  try { var saved = localStorage.getItem('theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+  $('theme').addEventListener('click', function () {
+    var dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+  $('yr').textContent = new Date().getFullYear();
+
+  var BUDGET = 20;
+  var CITIES = {
+    blr: { name: 'Bangalore', base: 70, sky: ['#f3d9b0', '#f7efe0'], sun: [520, 70],
+      blurb: 'Bangalore: 12.97° N, about 900 m up. Mild all year, strong sun from March to May, heavy monsoon rain from June to September. Cooling and shade matter more than heating.' },
+    bos: { name: 'Boston', base: 85, sky: ['#c9dbe6', '#eef2f2'], sun: [540, 128],
+      blurb: 'Boston: 42.34° N. Long, cold winters and humid summers, with a low winter sun from the south. Most energy goes to heating, so the envelope matters most.' }
+  };
+  // e: energy cut %, cf: comfort points, w: water cut %, cb: embodied carbon cut %, pv: energy offset as % of baseline. [Bangalore, Boston]
+  var GROUPS = [
+    { name: 'Form and envelope', items: [
+      { id: 'orient', name: 'Face the long sides north and south', cost: 0, e: [6, 8], cf: [3, 3],
+        tip: ['Long north and south walls are easy to shade, and the low east and west sun stays off the glass.', 'South glass lets Boston’s low winter sun in for free heat, while east and west walls stay small.'] },
+      { id: 'shade', name: 'Deep overhangs and shading', cost: 2, e: [12, 4], cf: [8, 3],
+        tip: ['Bangalore’s sun is high and harsh from March to May. Overhangs stop it before it reaches the glass.', 'In Boston shading helps in summer, but you still want the winter sun, so the gain is smaller.'] },
+      { id: 'insul', name: 'Super-insulated walls and roof', cost: 3, e: [4, 22], cf: [3, 8], cb: -4,
+        tip: ['Bangalore rarely gets cold, so heavy insulation buys little here.', 'This is Boston’s biggest win. In my Richards Hall study, better insulation also kept the wall above its dew point.'] },
+      { id: 'glazing', name: 'Triple glazing', cost: 2, e: [2, 8], cf: [1, 5],
+        tip: ['Good for comfort, but in a mild climate the energy savings are small.', 'Windows are the weak spot in a cold wall. Triple glazing stops cold draughts near the glass.'] },
+      { id: 'mass', name: 'Exposed thermal mass', cost: 1, e: [6, 4], cf: [5, 3],
+        tip: ['Bangalore’s warm days and cool nights suit a heavy slab: it soaks up the day’s heat and releases it at night.', 'Mass smooths temperatures, especially with south sun on the floor in winter.'] },
+      { id: 'vent', name: 'Cross-ventilation and ceiling fans', cost: 1, e: [14, 4], cf: [8, 3],
+        tip: ['Bangalore’s steady east–west breezes can cool the building for much of the year without AC.', 'Useful in Boston’s shoulder seasons, but winter windows stay shut.'] }
+    ] },
+    { name: 'Systems', items: [
+      { id: 'hp', name: 'Heat pump for heating and cooling', cost: 3, e: [12, 20], cf: [3, 4],
+        tip: ['An efficient heat pump handles the cooling peaks with far less electricity.', 'Heat pumps move heat instead of burning gas. My Seattle school section uses one with a COP around 4.'] },
+      { id: 'led', name: 'LEDs with daylight sensors', cost: 1, e: [8, 8], cf: [2, 2],
+        tip: ['Cheap and reliable: lights dim themselves when daylight is enough.', 'Cheap and reliable: lights dim themselves when daylight is enough.'] },
+      { id: 'erv', name: 'Heat-recovery ventilation', cost: 2, e: [3, 9], cf: [4, 6],
+        tip: ['Fresh air without opening windows, though Bangalore can often just open them.', 'Fresh air in winter without throwing away the heat. Great for indoor air quality too.'] }
+    ] },
+    { name: 'Energy', items: [
+      { id: 'pv', name: 'Rooftop solar panels', cost: 4, pv: [45, 32],
+        tip: ['Bangalore gets strong sun all year, so the roof produces a lot.', 'Boston’s winter sun is weak, so the same roof produces less. Cut demand first.'] },
+      { id: 'pv2', name: 'Solar canopy on the façade', cost: 3, pv: [15, 12],
+        tip: ['More generating area, and the canopy shades the wall below it.', 'Extra area when the roof is full. Often the last step to net zero.'] }
+    ] },
+    { name: 'Water', items: [
+      { id: 'rain', name: 'Rainwater harvesting tank', cost: 2, w: [35, 22],
+        tip: ['The monsoon brings a lot of water at once. In my Bangalore analysis, rainwater harvesting was one of the clearest strategies.', 'Boston’s rain is spread through the year, so a tank still saves water for flushing and irrigation.'] },
+      { id: 'fix', name: 'Low-flow fixtures', cost: 1, w: [25, 25],
+        tip: ['Showers and sinks were my biggest users in my own water footprint study.', 'Showers and sinks were my biggest users in my own water footprint study.'] },
+      { id: 'grey', name: 'Greywater reuse', cost: 2, w: [20, 20],
+        tip: ['Water from sinks and showers gets a second life flushing toilets.', 'Water from sinks and showers gets a second life flushing toilets.'] },
+      { id: 'garden', name: 'Rain garden and permeable paving', cost: 1, w: [8, 8], cf: [2, 2],
+        tip: ['Lets monsoon rain soak into the ground instead of running off.', 'Low-impact design keeps stormwater on site, like my Beyond Buildings and Water study.'] },
+      { id: 'roof', name: 'Green roof', cost: 3, e: [4, 3], w: [10, 10], cf: [4, 4], cb: 2,
+        tip: ['Keeps the roof cool under the strong sun and slows down rainwater.', 'Adds insulation and holds back stormwater.'] }
+    ] },
+    { name: 'Materials', items: [
+      { id: 'local', name: ['Local brick and lime plaster', 'Mass timber structure'], cost: 2, cb: 25, cf: [3, 2],
+        tip: ['Local brick and lime breathe in the humid months and travel a short distance to site.', 'Timber stores carbon instead of releasing it like concrete and steel.'] },
+      { id: 'recycled', name: 'Recycled steel and fly-ash concrete', cost: 1, cb: 12,
+        tip: ['Swapping some cement for fly ash cuts one of construction’s biggest carbon sources.', 'Swapping some cement for fly ash cuts one of construction’s biggest carbon sources.'] }
+    ] }
+  ];
+  var ALL = []; GROUPS.forEach(function (g) { g.items.forEach(function (s) { ALL.push(s); }); });
+  var city = 'blr', chosen = {}, best = 0;
+  var done = {}; try { done = JSON.parse(localStorage.getItem('nz-missions') || '{}'); } catch (e) {}
+
+  function ci() { return city === 'blr' ? 0 : 1; }
+  function compute(sel, c) {
+    var C = CITIES[c], k = c === 'blr' ? 0 : 1, load = C.base, offset = 0, comfort = 50, water = 1, carbon = 1, cost = 0;
+    ALL.forEach(function (s) {
+      if (!sel[s.id]) return;
+      cost += s.cost;
+      if (s.e) load *= 1 - s.e[k] / 100;
+      if (s.pv) offset += s.pv[k] / 100 * C.base;
+      if (s.cf) comfort += s.cf[k];
+      if (s.w) water *= 1 - s.w[k] / 100;
+      if (s.cb) carbon *= 1 - s.cb / 100;
+    });
+    var net = load - offset, saving = (C.base - net) / C.base;
+    var pts = { energy: Math.round(45 * clamp(saving, 0, 1)), water: Math.round(15 * clamp((1 - water) / .6, 0, 1)),
+      comfort: Math.round(20 * clamp((comfort - 50) / 40, 0, 1)), carbon: Math.round(15 * clamp((1 - carbon) / .4, 0, 1)), bonus: net <= 0 ? 5 : 0 };
+    var total = pts.energy + pts.water + pts.comfort + pts.carbon + pts.bonus;
+    return { load: load, offset: offset, net: net, comfort: Math.min(100, comfort), water: 1 - water, carbon: 1 - carbon, cost: cost, total: total, zero: net <= 0 };
+  }
+  function ratingOf(t) { return t >= 80 ? 'Platinum' : t >= 60 ? 'Gold' : t >= 50 ? 'Silver' : t >= 40 ? 'Certified' : ''; }
+  function rank(r) { return ['', 'Certified', 'Silver', 'Gold', 'Platinum'].indexOf(r); }
+
+  // build the cards
+  var groupsEl = $('groups');
+  GROUPS.forEach(function (g) {
+    var sec = document.createElement('div'); sec.className = 'group';
+    sec.innerHTML = '<h3>' + g.name + ' <span class="mono">' + g.items.length + ' moves</span></h3>';
+    var grid = document.createElement('div'); grid.className = 'cards';
+    g.items.forEach(function (s) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'card'; b.id = 'k-' + s.id; b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<b></b><span class="cost"></span><span class="fit"></span>';
+      b.addEventListener('click', function () { toggle(s, b); });
+      grid.appendChild(b); s.el = b;
+    });
+    sec.appendChild(grid); groupsEl.appendChild(sec);
+  });
+  var coinsEl = $('coins'); for (var i = 0; i < BUDGET; i++) coinsEl.appendChild(document.createElement('i'));
+
+  function fitOf(s) {
+    var k = ci(), v = s.e ? s.e[k] : s.pv ? s.pv[k] / 2 : s.w ? s.w[k] / 2 : s.cb ? s.cb / 2 : 0;
+    if (v >= 10) return ['hi', 'Strong in ' + CITIES[city].name];
+    if (v >= 5) return ['mid', 'Helps in ' + CITIES[city].name];
+    return ['lo', 'Small effect here'];
+  }
+  function paintCards(r) {
+    ALL.forEach(function (s) {
+      var b = s.el, on = !!chosen[s.id], f = fitOf(s);
+      b.querySelector('b').textContent = Array.isArray(s.name) ? s.name[ci()] : s.name;
+      b.querySelector('.cost').innerHTML = s.cost ? new Array(s.cost + 1).join('<i></i>') + '<em>' + s.cost + ' coin' + (s.cost > 1 ? 's' : '') + '</em>' : '<em>Free</em>';
+      var fit = b.querySelector('.fit'); fit.className = 'fit ' + f[0]; fit.textContent = f[1];
+      b.setAttribute('aria-pressed', on);
+      b.disabled = !on && r.cost + s.cost > BUDGET;
+      b.title = b.disabled ? 'Not enough coins left' : '';
+    });
+  }
+  var toastT;
+  function toast(html) { var t = $('toast'); t.innerHTML = html; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 5200); }
+  function toggle(s, b) {
+    var r = compute(chosen, city);
+    if (!chosen[s.id] && r.cost + s.cost > BUDGET) { toast('<b>Out of coins.</b> Take a strategy back to free some up.'); return; }
+    chosen[s.id] = !chosen[s.id];
+    if (motion) { b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); }
+    if (chosen[s.id]) toast('<b>' + (Array.isArray(s.name) ? s.name[ci()] : s.name) + '.</b> ' + s.tip[ci()]);
+    update(true);
+  }
+
+  function setBar(id, frac) { $(id).style.width = (clamp(frac, 0, 1) * 100).toFixed(1) + '%'; }
+  function update(fromMove) {
+    var C = CITIES[city], r = compute(chosen, city), rat = ratingOf(r.total);
+    paintCards(r);
+    // meters
+    $('mEnergy').textContent = (r.zero ? 'Net zero · ' : '') + r.net.toFixed(1) + ' kBtu/ft²·yr';
+    var be = $('bEnergy'); be.classList.toggle('zero', r.zero); be.querySelector('i').style.width = (clamp(r.net / C.base, 0, 1) * 100 || (r.zero ? 100 : 0)).toFixed(1) + '%';
+    $('mComfort').textContent = Math.round(r.comfort) + ' / 100'; setBar('bComfort', r.comfort / 100);
+    $('mWater').textContent = Math.round(r.water * 100) + '%'; setBar('bWater', r.water / .6);
+    $('mCarbon').textContent = r.carbon < -0.005 ? Math.round(-r.carbon * 100) + '% higher' : Math.round(r.carbon * 100) + '%'; setBar('bCarbon', r.carbon / .4);
+    $('score').textContent = r.total;
+    var circ = 2 * Math.PI * 62, ring = $('ringVal'); ring.style.strokeDasharray = circ; ring.style.strokeDashoffset = circ * (1 - clamp(r.total / 110, 0, 1));
+    ring.style.stroke = rat === 'Platinum' ? '#d8e2ea' : rat === 'Gold' ? '#e2a63b' : rat === 'Silver' ? '#c0c4c8' : rat ? '#a8c98a' : '#8f9479';
+    $('rating').textContent = rat ? 'LEED-style ' + rat + (r.zero ? ' · net zero' : '') : (r.zero ? 'Net zero' : 'Not rated yet');
+    $('coinsLeft').textContent = BUDGET - r.cost;
+    Array.prototype.forEach.call($('coins').children, function (c, k) { c.classList.toggle('spent', k < r.cost); });
+    // scene
+    $('skyA').setAttribute('stop-color', C.sky[0]); $('skyB').setAttribute('stop-color', C.sky[1]);
+    $('sun').setAttribute('transform', 'translate(' + C.sun[0] + ' ' + C.sun[1] + ')');
+    ['shade', 'insul', 'glazing', 'mass', 'vent', 'hp', 'led', 'erv', 'pv', 'pv2', 'rain', 'fix', 'grey', 'garden', 'roof', 'recycled', 'orient'].forEach(function (id) {
+      var el = $('v-' + id); if (el) el.classList.toggle('on', !!chosen[id]);
+    });
+    $('rainfall').classList.toggle('on', !!(chosen.rain || chosen.garden || chosen.roof));
+    $('tankWater').setAttribute('height', city === 'blr' ? 28 : 20); $('tankWater').setAttribute('y', city === 'blr' ? 290 : 298);
+    $('wall').setAttribute('fill', chosen.local ? (city === 'blr' ? 'url(#brick)' : 'url(#timber)') : '#d9d6cf');
+    $('heat').style.opacity = (chosen.shade ? .15 : 1) * (chosen.insul ? .6 : 1) * (chosen.glazing ? .8 : 1);
+    $('label').textContent = C.name + ' · ' + ALL.filter(function (s) { return chosen[s.id]; }).length + ' strategies · ' + r.cost + ' of ' + BUDGET + ' coins';
+    // missions and celebrations
+    var newly = [];
+    if (city === 'blr' && r.total >= 60 && !done['gold-blr']) newly.push('gold-blr');
+    if (city === 'bos' && r.zero && !done['zero-bos']) newly.push('zero-bos');
+    if (r.total >= 80 && !done.plat) newly.push('plat');
+    newly.forEach(function (m) { done[m] = true; });
+    if (newly.length) { try { localStorage.setItem('nz-missions', JSON.stringify(done)); } catch (e) {} }
+    paintMissions();
+    var score = rank(rat) + (r.zero ? 1 : 0);
+    if (fromMove && (newly.length || score > best && rank(rat) >= 3)) { confetti(); if (newly.length) toast('<b>Mission complete!</b> ' + document.querySelector('[data-m="' + newly[0] + '"] span:last-child').textContent + '.'); }
+    best = Math.max(best, score);
+  }
+  function paintMissions() { document.querySelectorAll('#missions li').forEach(function (li) { li.classList.toggle('done', !!done[li.dataset.m]); }); }
+
+  function pickCity(c) {
+    city = c; best = 0;
+    $('cBLR').setAttribute('aria-pressed', c === 'blr'); $('cBOS').setAttribute('aria-pressed', c === 'bos');
+    $('climate').textContent = CITIES[c].blurb;
+    // keep choices that still fit the budget
+    update(false);
+  }
+  $('cBLR').addEventListener('click', function () { pickCity('blr'); });
+  $('cBOS').addEventListener('click', function () { pickCity('bos'); });
+  $('reset').addEventListener('click', function () { chosen = {}; best = 0; update(false); toast('<b>Fresh site.</b> Start with the climate: what does this city need most?'); });
+
+  // confetti
+  var cv = $('confetti'), cx = cv.getContext('2d'), bits = [], running = false;
+  function confetti() {
+    if (!motion) return;
+    var b = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1; cv.width = b.width * d; cv.height = b.height * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    var cols = ['#e2a63b', '#4f8a4a', '#6aa7c8', '#c98663', '#f2efe6'];
+    for (var i = 0; i < 140; i++) bits.push({ x: b.width / 2, y: b.height * .45, vx: (Math.random() - .5) * 9, vy: -Math.random() * 9 - 3, r: Math.random() * 6.28, s: 4 + Math.random() * 5, c: cols[i % cols.length], life: 0 });
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    var W = cv.clientWidth, H = cv.clientHeight; cx.clearRect(0, 0, W, H);
+    bits = bits.filter(function (p) { return p.life < 160 && p.y < H + 20; });
+    bits.forEach(function (p) { p.life++; p.vy += .22; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += .12; cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); cx.restore(); });
+    if (bits.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, W, H); }
+  }
+
+  pickCity('blr');
+  window.__nz = { compute: compute, ALL: ALL, BUDGET: BUDGET };   // used by my own balance checks
+})();
+</script>
+</body>
+</html>

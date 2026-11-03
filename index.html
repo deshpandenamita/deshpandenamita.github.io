@@ -7,7 +7,7 @@
 <meta name="description" content="Namita Deshpande, architect and Sustainable Building Systems graduate student at Northeastern University. From Bangalore to Boston, designing with light, climate and people.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <script>
   // motion is opt-in: only when the browser can observe and the visitor hasn't asked for less motion
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');
@@ -167,6 +167,99 @@
   .pull::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--sage); transform-origin: top; }
   .anim .pull.pending::before { transform: scaleY(0); }
   .anim .pull::before { transition: transform 1.4s var(--ease) .3s; }
+  /* about me */
+  .about { padding-block: 96px 40px; }
+  .about-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 72px; align-items: center; }
+  .polaroid { position: relative; margin: 0; justify-self: center; width: min(100%, 400px); padding: 14px 14px 64px; background: #fbfaf6; box-shadow: 0 30px 60px -30px rgba(36,38,31,.55); rotate: -3deg; transition: rotate .8s var(--ease), translate .8s var(--ease), opacity 1s var(--ease), transform 1s var(--ease); }
+  .polaroid:hover { rotate: 0deg; translate: 0 -6px; }
+  .polaroid::before { content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 30px; translate: -50% 0; rotate: 2deg; background: rgba(226, 206, 150, .7); }
+  .polaroid img { display: block; width: 100%; height: auto; filter: contrast(1.05); }
+  .polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font: 600 30px/1 "Caveat", "Segoe Print", cursive; color: #3b3a32; }
+  .about-text h2 { font-size: clamp(46px, 7vw, 88px); font-weight: 400; margin-top: 12px; }
+  .about-lede { font: 400 clamp(23px, 2.4vw, 29px)/1.4 var(--display); margin-top: 22px; max-width: 30em; }
+  .about-text > p:not(.about-lede) { font-size: 18px; margin-top: 18px; max-width: 38em; }
+  .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 32px 0 0; border-top: 1px solid var(--line); }
+  .facts div { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .facts dt { font: 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
+  .facts dd { margin: 4px 0 0; font-size: 16px; }
+  .chip-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 30px; }
+  .chip-cols > div { transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .tags { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--plaster); font-size: 14px; transition: transform .4s var(--ease), border-color .3s, background-color .3s; }
+  .tags li:hover { transform: translateY(-3px) rotate(-2deg); border-color: var(--moss); }
+  .tags.warm li { background: color-mix(in srgb, var(--sun) 14%, var(--plaster)); }
+
+  /* play teaser */
+  .play-teaser { padding-block: 88px; background: #2f3a28; color: #f2efe6; }
+  .pt-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 48px; align-items: center; }
+  .play-teaser .mono { color: #c9d3b6; }
+  .play-teaser h2 { font-size: clamp(42px, 6vw, 76px); font-weight: 400; margin-top: 12px; }
+  .play-teaser p { font-size: 19px; margin-top: 18px; max-width: 30em; color: #e4e2d8; }
+  .pt-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 14px 26px; border-radius: 999px; background: #f0b955; color: #2a2108; font-weight: 600; text-decoration: none; transition: transform .4s var(--ease), box-shadow .4s; }
+  .pt-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(240, 185, 85, .8); }
+  .pt-btn span { transition: transform .4s var(--ease); } .pt-btn:hover span { transform: translateX(5px); }
+  .pt-note { display: block; margin-top: 14px; font: 13px var(--mono); color: #b8c2a6; }
+  .pt-visual svg { width: 100%; height: auto; display: block; }
+  .pt-sun { fill: #f0b955; } .pt-rays path { stroke: #f0b955; stroke-width: 4; stroke-linecap: round; }
+  .anim .pt-rays { transform-origin: 320px 62px; animation: spin 18s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pt-ground { fill: #4a5a3a; } .pt-house { fill: #efe9dc; } .pt-roof { fill: none; stroke: #c9b89a; stroke-width: 8; stroke-linejoin: round; }
+  .pt-pv path { fill: #2c4a86; stroke: #9fb6e4; stroke-width: 1.5; }
+  .anim .pt-pv path { animation: glint 3s ease-in-out infinite; } .anim .pt-pv path:nth-child(2) { animation-delay: .6s; }
+  @keyframes glint { 50% { fill: #4d6fb8; } }
+  .pt-win { fill: #f6d58b; } .pt-door { fill: #8a6a48; } .pt-shade { stroke: #c9b89a; stroke-width: 6; stroke-linecap: round; }
+  .pt-wind path { fill: none; stroke: #c9d3b6; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 26 14; }
+  .anim .pt-wind path { animation: blow 2.4s linear infinite; }
+  @keyframes blow { to { stroke-dashoffset: -80; } }
+  .pt-tree { fill: #6f9a52; } .pt-trunk { fill: #6b4a2f; }
+
+  /* creative: the studio table */
+  .table-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--plaster); color: var(--charcoal); font-size: 14px; cursor: pointer; transition: background-color .3s, color .3s, border-color .3s; }
+  .chip i { font: normal 12px var(--mono); color: var(--ash); margin-left: 4px; }
+  .chip[aria-pressed="true"] { background: var(--charcoal); color: var(--limewash); border-color: var(--charcoal); }
+  .chip[aria-pressed="true"] i { color: inherit; opacity: .7; }
+  .tbl-actions { display: flex; gap: 8px; }
+  .ghost-btn { padding: 8px 14px; border-radius: 999px; border: 1px dashed var(--sage); background: transparent; color: var(--moss); font: 13px var(--mono); cursor: pointer; transition: background-color .3s; }
+  .ghost-btn:hover { background: color-mix(in srgb, var(--sun) 14%, transparent); }
+  .studio-table { position: relative; height: 900px; margin-top: 20px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); touch-action: pan-y; transition: height .8s var(--ease);
+    background: linear-gradient(color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px) 0 0 / 40px 40px, var(--plaster); }
+  .print { position: absolute; left: 0; top: 0; width: var(--w, 190px); padding: 9px 9px 36px; border: 0; background: #fbfaf6; cursor: grab; box-shadow: 0 12px 26px -14px rgba(0,0,0,.5); transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)); transition: transform 1s var(--ease), opacity .5s, box-shadow .3s, scale .3s var(--ease); }
+  .print:hover { scale: 1.05; box-shadow: 0 26px 40px -18px rgba(0,0,0,.55); }
+  .print.dragging { transition: none; cursor: grabbing; scale: 1.08; box-shadow: 0 34px 50px -20px rgba(0,0,0,.6); }
+  .print::before { content: ""; position: absolute; top: -9px; left: 50%; width: 64px; height: 20px; translate: -50% 0; rotate: var(--tr, 3deg); background: rgba(226, 206, 150, .72); }
+  .print img { display: block; width: 100%; height: auto; pointer-events: none; background: #e9e5da; }
+  .print .cap { position: absolute; left: 10px; right: 10px; bottom: 7px; font: 600 19px/1 "Caveat", "Segoe Print", cursive; color: #3b3a32; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .print.out { opacity: 0; pointer-events: none; scale: .6; }
+  .table-hint { margin-top: 12px; }
+  .darkroom { margin-top: 72px; transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .dr-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 20px; }
+  .dr-head h3 { font-size: clamp(32px, 4vw, 46px); font-weight: 400; font-style: italic; margin-top: 6px; }
+  .dr-head p { max-width: 30em; color: var(--ash); }
+  .strip { overflow: hidden; padding-block: 26px; border-radius: 4px; background:
+      radial-gradient(circle at 50% 50%, #efebe3 0 4px, transparent 4.5px) 0 7px / 28px 14px repeat-x,
+      radial-gradient(circle at 50% 50%, #efebe3 0 4px, transparent 4.5px) 0 calc(100% - 7px) / 28px 14px repeat-x, #1c1b17; }
+  .strip-track { display: flex; gap: 14px; width: max-content; padding-inline: 14px; }
+  .anim .strip-track { animation: drift 80s linear infinite; }
+  .strip:hover .strip-track { animation-play-state: paused; }
+  .strip-track button { flex: none; height: 210px; padding: 0; border: 0; background: #2a2924; cursor: pointer; overflow: hidden; }
+  .strip-track img { height: 100%; width: auto; display: block; filter: grayscale(1) sepia(.5) brightness(.55) contrast(1.4) blur(1.5px); transition: filter 2.6s ease; }
+  .strip-track button.dev img, html:not(.anim) .strip-track img { filter: none; }
+  .strip-track button:hover img { filter: none; transition-duration: .5s; }
+  @media (max-width: 860px) {
+    .about { padding-block: 64px 24px; }
+    .about-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .polaroid { width: min(100%, 300px); }
+    .facts, .chip-cols { grid-template-columns: minmax(0, 1fr); }
+    .play-teaser { padding-block: 64px; }
+    .pt-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .studio-table { height: auto !important; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; padding: 24px 14px; }
+    .print { position: relative; width: auto; align-self: start; transform: rotate(var(--r, 0deg)); cursor: pointer; }
+    .print.out { display: none; }
+    .strip-track button { height: 150px; }
+  }
+
   /* case-study cards */
   .pcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
   .pcard { display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit; background: var(--plaster); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .4s, opacity 1s var(--ease); }
@@ -395,10 +488,12 @@
   <div class="wrap">
     <a class="sig" href="#top">Namita</a>
     <nav aria-label="Chapters">
+      <a href="#about">About</a>
       <a href="#bangalore">Bangalore</a>
       <a href="#practice">Practice</a>
       <a href="#boston">Boston</a>
       <a href="#studio">Creative work</a>
+      <a href="play/">Play</a>
       <a href="#hello">Say hello</a>
     </nav>
     <div class="bar-right">
@@ -451,6 +546,33 @@
       <span>light</span><span>climate</span><span>people</span><span>materials</span><span>water</span><span>craft</span>
     </div>
   </div>
+
+  <!-- ABOUT ME -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <figure class="polaroid" data-reveal>
+        <img src="work/about-portrait.jpg" alt="Black and white portrait of Namita Deshpande" width="526" height="468" loading="lazy">
+        <figcaption>Bangalore → Boston</figcaption>
+      </figure>
+      <div class="about-text">
+        <span class="mono" data-reveal>About me</span>
+        <h2 data-reveal class="split">Hi, I'm Namita.</h2>
+        <p class="about-lede" data-reveal>I'm an architect who fell for the science behind good buildings. I grew up and trained in Bangalore, and I'm now in Boston studying Sustainable Building Systems at Northeastern University.</p>
+        <p data-reveal>I like ideas that are creative and practical at the same time. Studio taught me to read a site and draw by hand. Graduate school is teaching me to model energy, point a thermal camera at a wall and ask occupants how a building really feels. I want to design spaces that are kinder to the people inside them and to the climate outside.</p>
+        <dl class="facts" data-stagger>
+          <div data-reveal><dt>Now</dt><dd>Sustainable Building Systems, Northeastern University</dd></div>
+          <div data-reveal><dt>Before</dt><dd>B.Arch, BMS School of Architecture, Bangalore, 2020–2025</dd></div>
+          <div data-reveal><dt>I speak</dt><dd>English, Kannada, Hindi and Telugu</dd></div>
+          <div data-reveal><dt>Looking for</dt><dd>Internships and roles in sustainable design and building performance</dd></div>
+        </dl>
+        <div class="chip-cols">
+          <div data-reveal><span class="mono">I work with</span><ul class="tags"><li>Climate analysis</li><li>Energy modelling in eQUEST</li><li>Thermography &amp; building science</li><li>Revit &amp; BIM</li><li>Rhino &amp; SketchUp</li><li>Enscape &amp; Twinmotion</li><li>LEED v5</li></ul></div>
+          <div data-reveal><span class="mono">Off the clock</span><ul class="tags warm"><li>Clay &amp; pottery</li><li>Glass mosaic</li><li>Zentangle &amp; painting</li><li>Pencil sketching</li><li>Heritage photography</li><li>AI design experiments</li><li>Rotaract volunteering</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SELECTED WORK -->
   <section class="selected" id="work">
     <div class="wrap">
@@ -620,6 +742,33 @@
     </div>
   </section>
 
+  <!-- PLAY -->
+  <section class="play-teaser" id="play">
+    <div class="wrap pt-grid">
+      <div>
+        <span class="mono">Your turn</span>
+        <h2 data-reveal class="split">Net zero, your move</h2>
+        <p data-reveal>Pick the strategies, stay on budget, and see whether your building can make more energy than it uses. Choose Bangalore or Boston: the climate changes what works.</p>
+        <a class="pt-btn" href="play/" data-reveal>Play the game <span aria-hidden="true">→</span></a>
+        <span class="pt-note" data-reveal>About three minutes. Three missions to unlock.</span>
+      </div>
+      <a class="pt-visual" href="play/" tabindex="-1" aria-hidden="true">
+        <svg viewBox="0 0 400 260" role="presentation">
+          <circle class="pt-sun" cx="320" cy="62" r="26"/>
+          <g class="pt-rays"><path d="M320 18v-12M320 118v12M276 62h-12M376 62h12M289 31l-8-8M351 93l8 8M351 31l8-8M289 93l-8 8"/></g>
+          <rect x="0" y="214" width="400" height="46" class="pt-ground"/>
+          <path d="M96 214V128l78-44 78 44v86Z" class="pt-house"/>
+          <path d="M86 132l88-52 88 52" class="pt-roof"/>
+          <g class="pt-pv"><path d="M118 112l30-17 8 5-30 17Z"/><path d="M160 88l30-17 8 5-30 17Z"/></g>
+          <rect x="120" y="150" width="40" height="44" class="pt-win"/><rect x="190" y="150" width="40" height="64" class="pt-door"/>
+          <path d="M112 146h56" class="pt-shade"/>
+          <g class="pt-wind"><path d="M20 160c30-10 50 10 80 0"/><path d="M14 182c34-12 56 12 92 0"/></g>
+          <circle cx="300" cy="196" r="20" class="pt-tree"/><rect x="297" y="196" width="6" height="18" class="pt-trunk"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
   <!-- CHAPTER V: creative work -->
   <section class="chapter" id="studio">
     <div class="wrap">
@@ -635,38 +784,31 @@
         </div>
       </div>
 
-      <figure class="banner" data-reveal>
-        <img src="work/beyond-arches.jpg" alt="Sunlit arched corridor in warm stone, from the Beyond Academics section of my portfolio" loading="lazy" width="1546" height="1200">
-        <figcaption>From the “Beyond Academics” section of my portfolio</figcaption>
-      </figure>
-
-      <div class="works" data-stagger>
-        <button type="button" class="work" data-reveal data-set="models">
-          <span class="ph"><img src="work/model-perspective.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">2 views</span></span>
-          <span class="lbl"><b>Physical models</b><span class="open">Open ↗</span></span>
-        </button>
-        <button type="button" class="work" data-reveal data-set="mosaic">
-          <span class="ph"><img src="work/mosaic-mandala.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">2 pieces</span></span>
-          <span class="lbl"><b>Glass mosaic</b><span class="open">Open ↗</span></span>
-        </button>
-        <button type="button" class="work" data-reveal data-set="art">
-          <span class="ph"><img src="work/rajasthani-folk-art.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">2 pieces</span></span>
-          <span class="lbl"><b>Painting &amp; zentangle</b><span class="open">Open ↗</span></span>
-        </button>
-        <button type="button" class="work" data-reveal data-set="sketch">
-          <span class="ph"><img src="work/abstract-sketch.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">2 sketches</span></span>
-          <span class="lbl"><b>Sketching</b><span class="open">Open ↗</span></span>
-        </button>
-        <button type="button" class="work" data-reveal data-set="photo">
-          <span class="ph"><img src="work/photo-framing.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">12 photos</span></span>
-          <span class="lbl"><b>Architectural photography</b><span class="open">Open ↗</span></span>
-        </button>
-        <button type="button" class="work" data-reveal data-set="ai">
-          <span class="ph"><img src="work/ai-green-haven.jpg" alt="" loading="lazy"><img class="next" alt="" loading="lazy"><span class="count">13 designs</span></span>
-          <span class="lbl"><b>AI explorations</b><span class="open">Open ↗</span></span>
-        </button>
+      <div class="table-tools" data-reveal>
+        <div class="chips" role="group" aria-label="Show work by medium">
+          <button type="button" class="chip" data-filter="all" aria-pressed="true">Everything <i>33</i></button>
+          <button type="button" class="chip" data-filter="models" aria-pressed="false">Models <i>2</i></button>
+          <button type="button" class="chip" data-filter="mosaic" aria-pressed="false">Mosaic <i>2</i></button>
+          <button type="button" class="chip" data-filter="art" aria-pressed="false">Painting <i>2</i></button>
+          <button type="button" class="chip" data-filter="sketch" aria-pressed="false">Sketches <i>2</i></button>
+          <button type="button" class="chip" data-filter="photo" aria-pressed="false">Photography <i>12</i></button>
+          <button type="button" class="chip" data-filter="ai" aria-pressed="false">AI <i>13</i></button>
+        </div>
+        <div class="tbl-actions">
+          <button type="button" class="ghost-btn" id="shuffle">Shuffle the table</button>
+          <button type="button" class="ghost-btn" id="tidy">Tidy up</button>
+        </div>
       </div>
-      <p class="mono" style="margin-top:14px">Hover to flip through, click to open the gallery.</p>
+      <div class="studio-table" id="studioTable" role="list" aria-label="My creative work, laid out like prints on a table"></div>
+      <p class="mono table-hint">Drag the prints around the table. Click one to see it large.</p>
+
+      <div class="darkroom" data-reveal>
+        <div class="dr-head">
+          <div><span class="mono">The darkroom</span><h3>Architectural photography</h3></div>
+          <p>Twelve buildings I've photographed, from Rajasthan's arches to brutalist towers. They develop as they come into view.</p>
+        </div>
+        <div class="strip"><div class="strip-track" id="strip"></div></div>
+      </div>
 
       <div class="giving">
         <div data-reveal><span class="mono">Giving back</span><h3 style="font-size:34px;font-style:italic;margin-top:6px">Rotaract Club of BMS Yelahanka</h3></div>
@@ -783,7 +925,7 @@
 
   /* ---------- scroll: header sun, timeline, nav, parallax ---------- */
   var dot = $('dayDot'), bar = $('bar'), tl = $('timeline'), archWrap = $('archWrap');
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.bar nav a[href^="#"]'));
   var ticking = false;
   function onScroll() {
     ticking = false;
@@ -1084,6 +1226,114 @@
   var sx = null;
   $('lbStage').addEventListener('pointerdown', function (e) { sx = e.clientX; });
   $('lbStage').addEventListener('pointerup', function (e) { if (sx === null) return; var dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) show(cur.i + (dx < 0 ? 1 : -1)); });
+
+  /* ---------- the studio table: every piece as a print you can move ---------- */
+  var table = $('studioTable'), prints = [], filter = 'all', tidy = false, zTop = 10;
+  var narrow = matchMedia('(max-width: 860px)');
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  Object.keys(WORK).forEach(function (set) {
+    WORK[set].items.forEach(function (it, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'print'; b.setAttribute('role', 'listitem');
+      b.setAttribute('aria-label', it[1] + ', ' + WORK[set].name + '. Open large');
+      b.dataset.set = set; b.dataset.i = i;
+      b.style.setProperty('--tr', rnd(-8, 8).toFixed(1) + 'deg');
+      var im = document.createElement('img'); im.src = imgUrl(it[0]); im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+      var cap = document.createElement('span'); cap.className = 'cap'; cap.textContent = it[1];
+      b.appendChild(im); b.appendChild(cap); table.appendChild(b); prints.push(b);
+    });
+  });
+  // shuffle so the mediums mix on the table
+  for (var s = prints.length - 1; s > 0; s--) { var j = Math.floor(Math.random() * (s + 1)), t = prints[s]; prints[s] = prints[j]; prints[j] = t; }
+
+  function layout() {
+    var shown = prints.filter(function (p) { return filter === 'all' || p.dataset.set === filter; });
+    prints.forEach(function (p) { p.classList.toggle('out', shown.indexOf(p) < 0); });
+    if (narrow.matches) { shown.forEach(function (p, k) { p.style.setProperty('--r', (tidy ? 0 : (k % 2 ? 1.6 : -1.6)) + 'deg'); p.style.order = k; }); return; }
+    var W = table.clientWidth, cell = 200, cols = Math.max(2, Math.floor((W - 40) / cell)), rows = Math.ceil(shown.length / cols);
+    var cw = (W - 40) / cols, ch = tidy ? 250 : 236, H = Math.max(520, rows * ch + 80);
+    table.style.height = H + 'px';
+    shown.forEach(function (p, k) {
+      var c = k % cols, r = Math.floor(k / cols), w = tidy ? Math.min(180, cw - 24) : rnd(160, 205);
+      var x = 20 + c * cw + (tidy ? (cw - w) / 2 : rnd(-12, cw - w + 12)), y = 28 + r * ch + (tidy ? 0 : rnd(-14, 30));
+      p.style.setProperty('--w', w.toFixed(0) + 'px');
+      p.style.setProperty('--x', Math.max(6, Math.min(W - w - 6, x)).toFixed(0) + 'px');
+      p.style.setProperty('--y', Math.max(6, y).toFixed(0) + 'px');
+      p.style.setProperty('--r', (tidy ? 0 : rnd(-9, 9)).toFixed(1) + 'deg');
+    });
+  }
+  // the prints start in one stack and are dealt across the table when it comes into view
+  function stack() {
+    var W = table.clientWidth;
+    table.style.height = '720px';
+    prints.forEach(function (p, k) {
+      p.style.setProperty('--w', '190px');
+      p.style.setProperty('--x', (W / 2 - 95 + rnd(-6, 6)).toFixed(0) + 'px');
+      p.style.setProperty('--y', (200 + rnd(-6, 6)).toFixed(0) + 'px');
+      p.style.setProperty('--r', rnd(-6, 6).toFixed(1) + 'deg');
+      p.style.zIndex = k;
+    });
+  }
+  if (motion && !narrow.matches) {
+    stack();
+    new IntersectionObserver(function (es, obs) {
+      if (!es[0].isIntersecting) return; obs.disconnect();
+      prints.forEach(function (p, k) { p.style.transitionDelay = (k * 45) + 'ms'; });
+      setTimeout(layout, 250);
+      setTimeout(function () { prints.forEach(function (p) { p.style.transitionDelay = ''; }); }, 2600);
+    }, { threshold: 0.25 }).observe(table);
+  } else layout();
+  addEventListener('resize', function () { clearTimeout(table._t); table._t = setTimeout(layout, 150); });
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      filter = c.dataset.filter;
+      document.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === c); });
+      layout();
+    });
+  });
+  $('shuffle').addEventListener('click', function () { tidy = false; prints.sort(function () { return Math.random() - .5; }); layout(); });
+  $('tidy').addEventListener('click', function () { tidy = true; layout(); });
+
+  // drag with a mouse or pen; a press without movement opens the piece
+  var drag = null;
+  table.addEventListener('pointerdown', function (e) {
+    var p = e.target.closest('.print'); if (!p) return;
+    p.style.zIndex = ++zTop;
+    if (e.pointerType === 'touch' || narrow.matches) return;
+    var x = parseFloat(p.style.getPropertyValue('--x')) || 0, y = parseFloat(p.style.getPropertyValue('--y')) || 0;
+    drag = { p: p, sx: e.clientX, sy: e.clientY, x: x, y: y, moved: false };
+    p.setPointerCapture(e.pointerId);
+  });
+  table.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 6) return;
+    drag.moved = true; drag.p.classList.add('dragging');
+    drag.p.style.setProperty('--x', (drag.x + dx).toFixed(0) + 'px');
+    drag.p.style.setProperty('--y', (drag.y + dy).toFixed(0) + 'px');
+    drag.p.style.setProperty('--r', (Math.max(-12, Math.min(12, dx * .04))).toFixed(1) + 'deg');
+  });
+  function endDrag() { if (!drag) return; drag.p.classList.remove('dragging'); var moved = drag.moved; drag.p._moved = moved; drag = null; }
+  table.addEventListener('pointerup', endDrag);
+  table.addEventListener('pointercancel', endDrag);
+  table.addEventListener('click', function (e) {
+    var p = e.target.closest('.print'); if (!p) return;
+    if (p._moved) { p._moved = false; return; }
+    openGallery(p.dataset.set, +p.dataset.i);
+  });
+
+  /* ---------- the darkroom: photographs develop as they come into view ---------- */
+  var strip = $('strip'), photos = WORK.photo.items;
+  for (var pass = 0; pass < 2; pass++) photos.forEach(function (it, k) {
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', it[1] + '. Open large');
+    if (pass) { b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; }
+    var im = document.createElement('img'); im.src = imgUrl(it[0]); im.alt = ''; im.loading = 'lazy';
+    b.appendChild(im); b.addEventListener('click', function () { openGallery('photo', k); }); strip.appendChild(b);
+  });
+  if (motion) new IntersectionObserver(function (es, obs) {
+    if (!es[0].isIntersecting) return; obs.disconnect();
+    Array.prototype.forEach.call(strip.children, function (b, k) { setTimeout(function () { b.classList.add('dev'); }, 400 + (k % photos.length) * 450); });
+  }, { threshold: 0.3 }).observe(strip);
 
   // banner parallax
   var banner = document.querySelector('.banner img');
