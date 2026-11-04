@@ -7,51 +7,47 @@
 <meta name="description" content="Namita Deshpande, architect and Sustainable Building Systems graduate student at Northeastern University. Undergraduate and graduate projects, practice and creative work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>
   // motion is opt-in: only when the browser can observe and the visitor hasn't asked for less motion
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');
 </script>
 <style>
-  /* Layout: a quiet Japanese-garden reading of the portfolio. Rice-paper ground washed with pastel mist, sage and blush,
-     soft warm ink instead of black, hairline gold rules between numbered sections, and a lot of empty space (ma).
-     A light serif carries the luxury; small spaced capitals do the labelling.
-     Quiet motion only: light that follows the cursor, motes drifting over the portrait, bamboo swaying beside it,
-     a leaf gliding from Bangalore to Boston, and a karesansui garden to rake in the contact section. */
+  /* Layout: warm limewash beige, charcoal ink and moss green, with sunlight gold used only for light.
+     Numbered sections, generous space, a classic serif for headings and a clean grotesk for reading.
+     Quiet motion: light that follows the cursor, motes over the portrait, a sun crossing the header as you scroll,
+     and a sand tray in the contact section that you draw lines in by moving across it. */
   :root {
-    --washi: #fdf8f0;      /* warm paper */
-    --paper: #ffffff;      /* raised paper */
-    --sumi: #2f2a35;       /* plum ink, never black */
-    --ash: #6c6370;        /* secondary ink */
-    --hinoki: #f4d7a1;     /* cypress */
-    --ai: #3556c8;         /* indigo, for links */
-    --shu: #e65a41;        /* persimmon, the pop accent */
-    --gold: #f0a92b;       /* yamabuki */
-    --sage: #6fae3e;       /* bamboo, matcha */
-    --blush: #f7b9c7;      /* sakura */
-    --mist: #9fd8f2;       /* sky */
-    --line: #eadccb;
-    --sand: #f4e8d2;       /* raked gravel */
-    /* section bands */
-    --b-about: #fde3ea; --b-under: #e6f3d6; --b-practice: #ffead8; --b-grad: #dcf0fb; --b-work: #fff3c9; --b-contact: #fde3ea;
-    --display: "Cormorant Garamond", "Shippori Mincho", Garamond, Georgia, serif;
-    --body: "Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif;
-    --mono: "Zen Kaku Gothic New", "Segoe UI", system-ui, sans-serif;
-    --ease: cubic-bezier(.22, .7, .2, 1);
+    --washi: #efebe3;      /* limewash: the page */
+    --paper: #f8f6f1;      /* plaster: raised surfaces */
+    --sumi: #24261f;       /* charcoal ink */
+    --ash: #6b6d62;        /* secondary ink */
+    --hinoki: #d8d2c5;
+    --ai: #4d5a3c;         /* moss: links */
+    --shu: #4d5a3c;        /* moss: the accent */
+    --gold: #e2a63b;       /* sunlight, used only for light */
+    --sage: #8f9479;       /* rules */
+    --blush: #e2dccf;
+    --mist: #dcd6c9;
+    --line: #d8d2c5;
+    --sand: #e9e1d0;       /* the sand tray */
+    --b-about: var(--washi); --b-under: var(--paper); --b-practice: var(--washi); --b-grad: var(--paper); --b-work: var(--washi); --b-contact: var(--paper);
+    --display: "Cormorant Garamond", "EB Garamond", Garamond, Georgia, serif;
+    --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+    --mono: "DM Mono", ui-monospace, Consolas, monospace;
+    --ease: cubic-bezier(.2, .75, .2, 1);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --washi: #211d27; --paper: #2b2632; --sumi: #f6efe6; --ash: #c3b7c1; --hinoki: #6b5636; --ai: #9db2ff; --shu: #ff8a6e; --gold: #ffc552; --sage: #8fd15a; --blush: #b96b82; --mist: #4f9cc0; --line: #3d3546; --sand: #332d38;
-      --b-about: #3b2431; --b-under: #22331d; --b-practice: #3d2a1f; --b-grad: #1c3140; --b-work: #3a3119; --b-contact: #3b2431; color-scheme: dark; }
+    :root:not([data-theme="light"]) { --washi: #171813; --paper: #1f211b; --sumi: #ebe6da; --ash: #a6a796; --hinoki: #34362d; --ai: #b6c49a; --shu: #b6c49a; --gold: #f0b955; --sage: #7f866a; --blush: #2a2c24; --mist: #2a2c24; --line: #34362d; --sand: #26281f; color-scheme: dark; }
   }
-  :root[data-theme="dark"] { --washi: #211d27; --paper: #2b2632; --sumi: #f6efe6; --ash: #c3b7c1; --hinoki: #6b5636; --ai: #9db2ff; --shu: #ff8a6e; --gold: #ffc552; --sage: #8fd15a; --blush: #b96b82; --mist: #4f9cc0; --line: #3d3546; --sand: #332d38;
-    --b-about: #3b2431; --b-under: #22331d; --b-practice: #3d2a1f; --b-grad: #1c3140; --b-work: #3a3119; --b-contact: #3b2431; color-scheme: dark; }
+  :root[data-theme="dark"] { --washi: #171813; --paper: #1f211b; --sumi: #ebe6da; --ash: #a6a796; --hinoki: #34362d; --ai: #b6c49a; --shu: #b6c49a; --gold: #f0b955; --sage: #7f866a; --blush: #2a2c24; --mist: #2a2c24; --line: #34362d; --sand: #26281f; color-scheme: dark; }
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--washi); color: var(--sumi); font: 300 16.5px/1.85 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   #glow { position: fixed; left: 0; top: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; pointer-events: none; z-index: 1;
-    background: radial-gradient(circle, color-mix(in srgb, var(--shu) 22%, transparent), color-mix(in srgb, var(--blush) 30%, transparent) 40%, transparent 68%); opacity: 0; transition: opacity .9s; }
+    background: radial-gradient(circle, color-mix(in srgb, var(--gold) 22%, transparent), transparent 65%); opacity: 0; transition: opacity .9s; }
   main, header, footer { position: relative; z-index: 2; }
   body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--washi); }
   body::after { content: ""; position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .05;
@@ -82,18 +78,17 @@
   .beam { position: relative; height: 1px; max-width: 1112px; margin: 0 auto; border: 0; overflow: visible; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--shu) 70%, transparent) 20%, color-mix(in srgb, var(--shu) 70%, transparent) 80%, transparent); }
   .beam::after { content: ""; position: absolute; left: 50%; top: -4px; width: 9px; height: 9px; translate: -50% 0; rotate: 45deg; border: 1px solid var(--shu); background: var(--washi); }
 
-  /* opening, washed with pastel light */
-  .opening { position: relative; overflow: hidden; padding-block: 88px 112px;
-    background: radial-gradient(55% 70% at 88% 25%, color-mix(in srgb, var(--blush) 95%, transparent), transparent 70%),
-                radial-gradient(40% 55% at 62% 92%, color-mix(in srgb, var(--shu) 34%, transparent), transparent 70%),
-                radial-gradient(45% 55% at 8% 88%, color-mix(in srgb, var(--mist) 90%, transparent), transparent 70%),
-                radial-gradient(40% 50% at 40% 0%, color-mix(in srgb, var(--gold) 45%, transparent), transparent 70%), var(--washi); }
-  .opening .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 80px; align-items: center; }
-  .opening .mono { color: var(--shu); }
-  .opening h1 { font-size: clamp(64px, 9.6vw, 136px); font-weight: 300; line-height: .98; letter-spacing: -.005em; margin-top: 26px; }
-  .opening h1 span { display: block; }
-  .opening h1 span + span { font-style: italic; padding-left: .5em; color: color-mix(in srgb, var(--sumi) 78%, var(--shu)); }
-  .opening .lede { font-size: 18px; max-width: 31em; margin-top: 34px; color: var(--sumi); }
+  /* opening: words on the left, the portrait in a lit arch on the right */
+  .opening { position: relative; padding-block: 72px 104px; }
+  .opening .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 72px; align-items: center; }
+  .opening h1 { font-size: clamp(52px, 6.6vw, 96px); font-weight: 400; line-height: 1.02; letter-spacing: -.01em; margin-top: 22px; }
+  .opening h1 em { font-style: italic; color: var(--shu); }
+  .opening .lede { font-size: 19px; line-height: 1.7; max-width: 30em; margin-top: 30px; color: var(--sumi); }
+  .route .dot { position: absolute; top: 4px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .anim .route .dot { animation: fly 4.5s var(--ease) infinite; }
+  @keyframes fly { 0% { left: 0; opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+  .portrait .frame-line { position: absolute; inset: -16px; width: calc(100% + 32px); height: calc(100% + 32px - 56px); overflow: visible; pointer-events: none; }
+  .portrait .frame-line path { fill: none; stroke: var(--sage); stroke-width: 1; stroke-dasharray: 2 5; vector-effect: non-scaling-stroke; }
   .route { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 40px; font: 400 11.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--ash); }
   .route .leg { position: relative; width: 170px; height: 16px; }
   .route .leg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: repeating-linear-gradient(90deg, var(--ash) 0 3px, transparent 3px 8px); opacity: .55; }
@@ -241,17 +236,27 @@
   .copy-btn { font: 400 10.5px var(--mono); letter-spacing: .2em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--sumi); padding: 7px 14px; cursor: pointer; }
   .copy-btn:hover { border-color: var(--shu); color: var(--shu); }
   .garden { margin: 0; }
-  .garden .bed { position: relative; }
-  .garden .bed::before { content: ""; position: absolute; inset: -12px; border: 1px solid color-mix(in srgb, var(--shu) 50%, transparent); pointer-events: none; }
-  .garden canvas { display: block; width: 100%; aspect-ratio: 5 / 4; touch-action: none; cursor: crosshair; background: var(--sand); box-shadow: 0 34px 70px -46px rgba(74, 69, 62, .45); }
-  .garden figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; font: italic 300 17px var(--display); color: var(--ash); }
-  .garden button { border: 0; background: none; padding: 0; color: var(--shu); cursor: pointer; font: 400 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; }
+  .garden .bed { position: relative; padding: 14px; background: linear-gradient(135deg, #c9ad7f, #9c8058); border-radius: 4px; box-shadow: 0 40px 80px -50px rgba(60, 48, 30, .6), inset 0 1px 0 rgba(255, 255, 255, .35); }
+  .garden .bed::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(255, 248, 232, .35); pointer-events: none; border-radius: 2px; }
+  .garden .tray { position: relative; aspect-ratio: 5 / 4; overflow: hidden; border-radius: 2px; box-shadow: inset 0 3px 10px rgba(60, 48, 30, .3), inset 0 0 0 1px rgba(60, 48, 30, .18); }
+  .garden canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  .garden #garden { background: var(--sand); cursor: none; }
+  .garden #gardenTop { pointer-events: none; }
+  .garden .hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); font: italic 300 16px var(--display); color: rgba(70, 58, 40, .75); background: rgba(255, 250, 240, .65); backdrop-filter: blur(4px); padding: 6px 16px; border-radius: 999px; pointer-events: none; transition: opacity 1.2s ease; white-space: nowrap; }
+  .garden .hint.gone { opacity: 0; }
+  .garden figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; margin-top: 22px; }
+  .garden figcaption > span { font: italic 300 17px var(--display); color: var(--ash); }
+  .tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tools button { border: 1px solid var(--line); background: transparent; color: var(--ash); border-radius: 999px; padding: 7px 13px; cursor: pointer; font: 400 10.5px var(--mono); letter-spacing: .16em; text-transform: uppercase; transition: background .3s, color .3s, border-color .3s; }
+  .tools button:hover { color: var(--sumi); border-color: var(--shu); }
+  .tools button[aria-pressed="true"] { background: var(--sumi); border-color: var(--sumi); color: var(--washi); }
+  .tools .sep { width: 1px; background: var(--line); margin: 2px 4px; }
 
   footer { padding-block: 34px 50px; border-top: 1px solid var(--line); }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
   footer .mono { text-transform: none; letter-spacing: .06em; }
 
-  /* ---------- colour: every section has its own band ---------- */
+  /* ---------- colour: limewash and plaster sections, moss accents, no pastels ---------- */
   .beam { display: none; }
   #about { background: var(--b-about); }
   #undergrad { background: var(--b-under); }
@@ -259,81 +264,41 @@
   #grad { background: var(--b-grad); }
   #workshops { background: var(--b-work); }
   #contact { background: var(--b-contact); }
-  #about .sec-no { color: #d9466b; } #undergrad .sec-no { color: #4f8f25; } #practice .sec-no { color: var(--shu); }
-  #grad .sec-no { color: #2a8bc0; } #workshops .sec-no { color: #c98a0c; } #contact .sec-no { color: #d9466b; }
-  .sec-head { border-bottom-color: color-mix(in srgb, var(--sumi) 14%, transparent); }
-  .facts div, .timeline li, .pc-stat, .skills, .contacts .row { border-color: color-mix(in srgb, var(--sumi) 12%, transparent); }
-  .line { background: linear-gradient(90deg, #e65a41, #f08a3c 50%, #f0a92b); border: 0; }
-  .line span { color: #fffaf2; }
-  .line span::after { border-color: #fffaf2; background: #fffaf2; }
-  .bamboo { color: var(--sage); }
-  .route .leaf { color: var(--sage); }
-  .portrait::before { border-color: var(--gold); }
-  .btn.solid { background: var(--shu); border-color: var(--shu); color: #fff; }
-  .btn.solid:hover { background: var(--ai); border-color: var(--ai); }
+  #creative { background: var(--washi); }
+  .sec { border-top: 1px solid var(--line); }
+  .sec-head { border-bottom-color: var(--line); }
+  .line { background: var(--paper); }
+  .line span { color: var(--ash); }
+  .line span::after { border-color: var(--sage); }
+  .portrait::before { border-color: color-mix(in srgb, var(--sage) 80%, transparent); border-style: dashed; }
+  .btn.solid { background: var(--sumi); border-color: var(--sumi); color: var(--washi); }
+  .btn.solid:hover { background: var(--shu); border-color: var(--shu); color: var(--washi); }
   .btn:hover { border-color: var(--shu); color: var(--shu); }
-  .pc-img { box-shadow: 0 24px 46px -30px rgba(47, 42, 53, .45); }
-  .pc-body::before { color: var(--shu); }
-  .pcard:hover .pc-body b { color: var(--ai); }
-  .pcard .go { color: var(--shu); }
-  /* creative: deep indigo */
-  #creative { background: #2c3b8f; --sumi: #fdf8f0; --ash: #c9cff5; --paper: #36469e; --line: rgba(255,255,255,.16); --shu: #ffb38f; --blush: #ffb38f; color: var(--sumi); }
-  #creative .sec-no { color: #ffb38f; }
-  #creative .tabs button { border-color: rgba(255,255,255,.3); color: #e5e8ff; }
-  #creative .tabs button[aria-selected="true"] { background: #ffb38f; border-color: #ffb38f; color: #2c1d14; }
-  #creative .frame::before { border-color: #f0c35a; }
-  #creative .frame .mat { background: #fdf8f0; }
-  #creative .ex-nav button { border-color: rgba(255,255,255,.45); color: #fdf8f0; }
-  #creative .ex-nav button:hover { border-color: #ffb38f; color: #ffb38f; }
-  /* play: rich matcha to sky */
-  .play { background: linear-gradient(120deg, #2f8a5a, #2f9cbf); color: #fdf8f0; --sumi: #fdf8f0; --ash: #dff3ea; --shu: #ffd36b; }
-  .play svg .thin { stroke: #fdf8f0; opacity: .7; } .play svg .gold { stroke: #ffd36b; }
-  .play .btn { border-color: #fdf8f0; color: #fdf8f0; } .play .btn:hover { background: #fdf8f0; color: #1f5a40; }
-  .play .note { color: #dff3ea; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #creative { background: #1f2a6b; } :root:not([data-theme="light"]) .play { background: linear-gradient(120deg, #1f5f40, #1d6f8c); } }
-  :root[data-theme="dark"] #creative { background: #1f2a6b; } :root[data-theme="dark"] .play { background: linear-gradient(120deg, #1f5f40, #1d6f8c); }
+  .pc-img { box-shadow: 0 24px 46px -32px rgba(36, 38, 31, .4); }
+  .tabs button[aria-selected="true"] { background: var(--sumi); border-color: var(--sumi); color: var(--washi); }
+  .frame::before { border-color: var(--line); }
+  /* play: one deep moss band */
+  .play { background: #3f4a31; color: #efebe3; --sumi: #efebe3; --ash: #cfd2c2; --shu: #e2a63b; --sage: #b6c49a; }
+  .play svg .thin { stroke: #efebe3; opacity: .65; } .play svg .gold { stroke: #e2a63b; }
+  .play .btn { border-color: #efebe3; color: #efebe3; } .play .btn:hover { background: #efebe3; color: #3f4a31; border-color: #efebe3; }
+  .play .note { color: #cfd2c2; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .play { background: #2a3122; } }
+  :root[data-theme="dark"] .play { background: #2a3122; }
 
-  /* ---------- opening: the view from the engawa ---------- */
-  .hero { position: relative; height: clamp(640px, calc(100vh - 64px), 900px); overflow: hidden; background: #ffd9b8; }
-  #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: pan-y; }
-  .hero-text { position: relative; z-index: 2; max-width: 640px; padding: clamp(84px, 11vh, 124px) 0 0 clamp(52px, 7vw, 110px); pointer-events: none; }
-  .hero-text a { pointer-events: auto; }
-  .hero-text .mono { color: #b8442f; }
-  .hero h1 { font-size: clamp(40px, 4.9vw, 74px); font-weight: 400; line-height: 1.04; margin-top: 16px; color: #2f2a35; text-shadow: 0 2px 30px rgba(255, 244, 230, .7); }
-  .hero h1 em { font-style: italic; }
-  .w-sun { color: #e65a41; } .w-wind { color: #4f8f25; } .w-sea { color: #2368b8; }
-  .hero-sub { margin-top: 20px; font-size: 18px; max-width: 30em; color: #3a3240; text-shadow: 0 1px 18px rgba(255, 244, 230, .8); }
-  .hero .route { color: #4b4250; }
-  .hero .cta { margin-top: 28px; }
-  .hero .btn:not(.solid) { background: rgba(255, 250, 242, .7); color: #2f2a35; border-color: rgba(47, 42, 53, .35); }
-  .scene-tip { position: absolute; left: 50%; bottom: 3%; translate: -50% 0; z-index: 2; padding: 8px 16px; border-radius: 999px; background: rgba(255, 250, 242, .86); font-size: 13px; color: #3a3240; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 22px -12px rgba(0, 0, 0, .35); transition: opacity .4s; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero h1, :root:not([data-theme="light"]) .hero-sub, :root:not([data-theme="light"]) .hero .route { color: #f6efe6; text-shadow: 0 2px 24px rgba(10, 12, 40, .7); } :root:not([data-theme="light"]) .w-sun { color: #ffb08f; } :root:not([data-theme="light"]) .w-wind { color: #a8e07a; } :root:not([data-theme="light"]) .w-sea { color: #8fc8ff; } :root:not([data-theme="light"]) .hero .btn:not(.solid) { background: rgba(30, 28, 50, .6); color: #f6efe6; border-color: rgba(255, 255, 255, .35); } }
-  :root[data-theme="dark"] .hero h1, :root[data-theme="dark"] .hero-sub, :root[data-theme="dark"] .hero .route { color: #f6efe6; text-shadow: 0 2px 24px rgba(10, 12, 40, .7); }
-  :root[data-theme="dark"] .w-sun { color: #ffb08f; } :root[data-theme="dark"] .w-wind { color: #a8e07a; } :root[data-theme="dark"] .w-sea { color: #8fc8ff; }
-  :root[data-theme="dark"] .hero .btn:not(.solid) { background: rgba(30, 28, 50, .6); color: #f6efe6; border-color: rgba(255, 255, 255, .35); }
-  @media (max-width: 900px) {
-    .hero { height: 760px; }
-    .hero-text { padding: 92px 24px 0 34px; }
-    .scene-tip { white-space: normal; text-align: center; width: max-content; max-width: 86%; }
-  }
-
-  /* about with the portrait */
-  .about-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 96px; }
-  .about-grid .portrait { margin-left: 70px; }
-  .status { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 40px 0 0; padding: 22px 26px; border-radius: 16px; background: var(--paper); box-shadow: 0 20px 50px -34px rgba(47, 42, 53, .45); }
+  /* about: words and the status card side by side */
+  .about-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: start; gap: 80px; }
+  .status { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; padding: 10px 28px; border-radius: 4px; background: var(--paper); border: 1px solid var(--line); }
   .status div { padding: 12px 0; border-bottom: 1px solid color-mix(in srgb, var(--sumi) 8%, transparent); }
   .status div:nth-last-child(-n+1) { border-bottom: 0; }
   .status dt { font: 400 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--ash); }
   .status dd { margin: 4px 0 0; font: 400 18px/1.4 var(--display); }
-  .live { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #4f9a2c; box-shadow: 0 0 0 0 rgba(79, 154, 44, .5); vertical-align: middle; }
+  .live { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #6b8a3c; box-shadow: 0 0 0 0 rgba(107, 138, 60, .5); vertical-align: middle; }
   .anim .live { animation: ping 2s infinite; }
-  @keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(79, 154, 44, 0); } }
+  @keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(107, 138, 60, 0); } }
+  .sig { font: italic 400 24px var(--display); letter-spacing: 0; }
 
   @media (max-width: 900px) {
-    .about-grid .portrait { margin-left: 0; }
-    .status { grid-template-columns: minmax(0, 1fr); }
-    .sig { font-size: 17px; white-space: nowrap; gap: 9px; }
-    .seal { width: 30px; height: 30px; font-size: 13px; }
+    .sig { font-size: 20px; white-space: nowrap; }
   }
 
   /* the small sun in the header travels its arc as you scroll */
@@ -377,7 +342,7 @@
 
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="sig" href="#top"><span class="seal" aria-hidden="true">ND</span>Namita Deshpande</a>
+    <a class="sig" href="#top">Namita Deshpande</a>
     <nav aria-label="Sections">
       <a href="#about">About</a>
       <a href="#undergrad">Undergraduate</a>
@@ -403,20 +368,28 @@
 
 <main id="top">
 
-  <!-- OPENING: the view from the engawa -->
-  <section class="hero" id="hero">
-    <canvas id="scene" aria-label="The view from a Japanese timber veranda: a wind chime, a paper lantern and a rain chain frame the sea, offshore wind turbines and a mountain trail with a hiker. Move to make the wind; click the sea to launch a paper boat."></canvas>
-    <div class="hero-text">
-      <p class="mono rise">Namita Deshpande · Architect, Sustainable Building Systems</p>
-      <h1 class="rise" style="--d:120ms">Designing with the <em class="w-sun">sun</em>, the <em class="w-wind">wind</em> and the <em class="w-sea">sea</em>.</h1>
-      <p class="hero-sub rise" style="--d:280ms">An architect from Bangalore, now in Boston. I love the ocean, long hikes and a good adventure, and I design buildings that work with their climate.</p>
-      <div class="route rise" style="--d:420ms"><span>Bangalore · 12.97° N</span><span class="leg" aria-hidden="true"><svg class="leaf" viewBox="0 0 24 24"><path d="M3 15C6 6 14 3 21 3c0 8-4 15-13 17-2 .4-4 0-5-1l4-4" fill="currentColor"/><path d="M4 20 15 9" stroke="#fff" stroke-opacity=".6" stroke-width="1" fill="none"/></svg></span><span>Boston · 42.34° N</span></div>
-      <div class="cta rise" style="--d:540ms">
-        <a class="btn solid" href="#grad">See my projects</a>
-        <a class="btn" href="#contact">Get in touch</a>
+  <!-- OPENING -->
+  <section class="opening" id="hero">
+    <div class="wrap">
+      <div>
+        <p class="mono rise">Namita Deshpande · Architect, Sustainable Building Systems</p>
+        <h1 class="rise" style="--d:120ms">Designing with the <em>sun</em>, the <em>wind</em> and the <em>sea</em>.</h1>
+        <p class="lede rise" style="--d:280ms">An architect from Bangalore, now in Boston. I love the ocean, long hikes and a good adventure, and I design buildings that work with their climate.</p>
+        <div class="route rise" style="--d:420ms"><span>Bangalore · 12.97° N</span><span class="leg" aria-hidden="true"><i class="dot"></i></span><span>Boston · 42.34° N</span></div>
+        <div class="cta rise" style="--d:540ms">
+          <a class="btn solid" href="#grad">See my projects</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
       </div>
+      <figure class="portrait rise" style="--d:300ms">
+        <div class="arch">
+          <img src="https://ugc.production.linktr.ee/bedcd49e-5587-4099-a657-d80676765a36_Me.jpeg?io=true&size=avatar-v3_0" alt="Namita Deshpande" width="360" height="498">
+          <span class="beam-light" aria-hidden="true"></span>
+          <canvas id="motes" aria-hidden="true"></canvas>
+        </div>
+        <figcaption id="archCap">Light from the window, wherever you are</figcaption>
+      </figure>
     </div>
-    <div class="scene-tip" id="sceneTip">Move to make the wind · click the sea to launch a paper boat</div>
   </section>
 
   <div class="line" aria-label="Light and shadow, natural materials, climate, people, craft, the space between">
@@ -431,19 +404,6 @@
     <div class="wrap">
       <header class="sec-head" data-reveal><span class="sec-no">01</span><div><h2>About me</h2><p class="mono sub">Architect · Building performance · Bangalore and Boston</p></div></header>
       <div class="about-grid">
-        <figure class="portrait" data-reveal>
-          <svg class="bamboo l" viewBox="0 0 120 560" aria-hidden="true">
-            <g class="stalk"><path d="M60 560V18" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".55"/><path d="M55 470h10M55 380h10M55 290h10M55 200h10M55 112h10" stroke="currentColor" stroke-width="1.6" opacity=".9"/><path d="M62 200q30-14 56-8q-26 10-56 8ZM58 290q-30-16-56-8q26 10 56 8ZM62 112q24-22 50-22q-20 16-50 22ZM58 380q-26-10-48 0q22 6 48 0Z" fill="currentColor" opacity=".55"/></g>
-            <g class="stalk"><path d="M92 560V150" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" opacity=".45"/><path d="M88 480h8M88 400h8M88 320h8M88 240h8" stroke="currentColor" stroke-width="1.4" opacity=".8"/><path d="M94 240q22-16 26-4q-12 8-26 4ZM90 320q-20-10-34-2q16 8 34 2Z" fill="currentColor" opacity=".45"/></g>
-            <g class="stalk"><path d="M26 560V260" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity=".4"/><path d="M22 490h8M22 420h8M22 340h8" stroke="currentColor" stroke-width="1.3" opacity=".8"/><path d="M28 340q20-14 34-8q-16 10-34 8Z" fill="currentColor" opacity=".4"/></g>
-          </svg>
-          <div class="arch">
-            <img src="https://ugc.production.linktr.ee/bedcd49e-5587-4099-a657-d80676765a36_Me.jpeg?io=true&size=avatar-v3_0" alt="Namita Deshpande" width="360" height="498" loading="lazy">
-            <span class="beam-light" aria-hidden="true"></span>
-            <canvas id="motes" aria-hidden="true"></canvas>
-          </div>
-          <figcaption id="archCap">Light from the window, wherever you are</figcaption>
-        </figure>
         <div>
           <div class="text" data-reveal>
             <p>I'm an architect who fell for the science behind good buildings.</p>
@@ -451,6 +411,8 @@
             <p>I like ideas that are creative and practical at the same time, and spaces that are kind to the people inside them and to the climate outside.</p>
             <p>Away from my desk you'll find me by the ocean, on a long hike or planning the next adventure. When I'm home, I make things with my hands: clay, glass mosaic, zentangle, sketches and photographs.</p>
           </div>
+        </div>
+        <div>
           <dl class="status" data-reveal>
             <div><dt>Now</dt><dd>Sustainable Building Systems, Northeastern University</dd></div>
             <div><dt>Status</dt><dd><i class="live" aria-hidden="true"></i>Open to internships and roles</dd></div>
@@ -556,14 +518,14 @@
         <span class="note">About three minutes · three missions</span>
       </div>
       <svg viewBox="0 0 400 260" aria-hidden="true">
-        <!-- a pavilion drawn in fine line: solar roof, sun, bamboo, still water -->
+        <!-- a pavilion drawn in fine line: solar roof, sun, a young tree, still water -->
         <circle class="gold sun" cx="300" cy="78" r="26"/>
         <path class="thin" d="M40 120q130-34 260 0"/>
         <path class="gold" d="M86 108l42-10M140 98l44-4M196 96l44 4"/>
         <path class="thin" d="M70 120v86M270 120v86M110 120v86M230 120v86M60 206h220M70 150h200"/>
         <path class="thin" d="M130 150v56M170 150v56M210 150v56"/>
         <path class="thin" d="M10 214h380M40 226h120M200 226h150M80 238h90M230 238h80"/>
-        <g class="stalk"><path class="thin" d="M342 214V96M336 186h12M336 150h12M336 118h12" style="opacity:.7"/><path d="M344 150q22-10 34-4q-16 8-34 4ZM340 118q-20-12-34-6q16 8 34 6Z" fill="var(--sage)"/></g>
+        <g class="stalk"><path class="thin" d="M342 214V150M342 176l-12-12M342 166l10-10" style="opacity:.8"/><circle cx="342" cy="134" r="26" fill="none" stroke="var(--sage)" stroke-width="1.2"/><circle cx="330" cy="142" r="14" fill="none" stroke="var(--sage)" stroke-width="1" opacity=".7"/></g>
       </svg>
     </div>
   </section>
@@ -583,8 +545,10 @@
           </div>
         </div>
         <figure class="garden" data-reveal>
-          <div class="bed"><canvas id="garden" aria-label="A small raked gravel garden with three stones. Drag across it to rake the gravel."></canvas></div>
-          <figcaption><span>A karesansui garden. Drag to rake the gravel.</span><button type="button" id="smooth">Smooth it</button></figcaption>
+          <div class="bed"><div class="tray"><canvas id="garden" aria-label="A smooth sand garden with three stones. Move across it to rake lines in the sand."></canvas><canvas id="gardenTop" aria-hidden="true"></canvas><span class="hint" id="gardenHint">Move across the sand to draw lines</span></div></div>
+          <figcaption><span>A sand tray. Move across it and take a breath.</span>
+            <span class="tools" role="group" aria-label="Garden tools"><button type="button" data-tool="rake" aria-pressed="true">Rake</button><button type="button" data-tool="fine" aria-pressed="false">Fine comb</button><button type="button" data-tool="draw" aria-pressed="false">Single line</button><span class="sep"></span><button type="button" id="gardenSound" aria-pressed="true">Sound</button><button type="button" id="smooth" aria-pressed="false">Smooth</button></span>
+          </figcaption>
         </figure>
       </div>
     </div>
@@ -609,7 +573,7 @@
     var dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     root.dataset.theme = dark ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
-    raked = null; paintGarden(false); if (window.__scene) window.__scene();
+    paintGarden(); if (window.__scene) window.__scene();
   });
 
   /* reveals, only for what starts below the fold */
@@ -912,65 +876,153 @@
   frame.addEventListener('pointerup', function (e) { if (sx === null) return; var dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1)); });
   pickSet('photo');
 
-  /* karesansui: rake the gravel around three stones */
-  var cv = $('garden'), g = cv.getContext('2d'), W = 0, H = 0, raked = null;
-  var stones = [[.28, .38, .085], [.7, .3, .06], [.58, .72, .1]];
+  /* karesansui: a clean sand tray. Just moving the cursor across it (or dragging a finger on a phone)
+     combs lines into the sand. #garden keeps the sand and the lines; #gardenTop redraws each frame with
+     soft light, loose grains, the stones and the rake. A gentle sand sound follows the rake's speed. */
+  var cv = $('garden'), g = cv.getContext('2d'), ov = $('gardenTop'), o = ov.getContext('2d');
+  var W = 0, H = 0, D = 1, grain = null, tone = null, tool = 'rake', soundOn = true, live = false;
+  var stones = [[.26, .42, .082, .74, -.3], [.71, .3, .056, .8, .5], [.6, .74, .098, .66, .15]];
+  var TOOLS = { rake: { n: 5, gap: 8, brush: 44 }, fine: { n: 11, gap: 3.4, brush: 40 }, draw: { n: 1, gap: 0, brush: 10 } };
   function css(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
+  function rgbOf(c) { var m = c.replace('#', ''); if (m.length === 3) m = m.replace(/./g, '$&$&'); var v = parseInt(m, 16); return [v >> 16 & 255, v >> 8 & 255, v & 255]; }
   function size() {
-    var b = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1);
+    var b = cv.getBoundingClientRect(); D = Math.min(2, devicePixelRatio || 1);
     W = b.width; H = b.height; if (!W) return false;
-    cv.width = W * d; cv.height = H * d; g.setTransform(d, 0, 0, d, 0, 0); return true;
+    [cv, ov].forEach(function (c) { c.width = Math.round(W * D); c.height = Math.round(H * D); });
+    g.setTransform(D, 0, 0, D, 0, 0); o.setTransform(D, 0, 0, D, 0, 0); return true;
   }
-  function groove(x1, y1, x2, y2, dark, light) {
+  function makeTone() {
+    var s = rgbOf(css('--sand')), dk = (s[0] * .3 + s[1] * .59 + s[2] * .11) / 255 < .4;
+    tone = { dark: dk,
+      groove: dk ? 'rgba(0, 0, 0, .42)' : 'rgba(92, 74, 48, .42)',
+      shine: dk ? 'rgba(255, 255, 255, .1)' : 'rgba(255, 252, 244, .85)',
+      berm: dk ? 'rgba(255, 255, 255, .05)' : 'rgba(255, 252, 244, .3)',
+      speck: dk ? 'rgba(255, 255, 255, .25)' : 'rgba(110, 90, 60, .55)' };
+    // fine, uneven grain so the sand never looks like a flat colour
+    var c = document.createElement('canvas'), n = 220; c.width = c.height = n;
+    var x = c.getContext('2d'), im = x.createImageData(n, n), d = im.data;
+    for (var i = 0; i < d.length; i += 4) {
+      var v = (Math.random() - .5) * (dk ? 8 : 13), r = Math.random();
+      if (r < .008) v -= dk ? 14 : 30; else if (r < .015) v += dk ? 18 : 24;
+      d[i] = s[0] + v; d[i + 1] = s[1] + v; d[i + 2] = s[2] + v * .85; d[i + 3] = 255;
+    }
+    x.putImageData(im, 0, 0); grain = g.createPattern(c, 'repeat');
+    try { grain.setTransform(new DOMMatrix().scale(1 / D)); } catch (e) {}
+  }
+  function seg(ctx, x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+  // a groove: a shadowed lip away from the light, a bright lip facing it
+  function groove(x1, y1, x2, y2, w) {
     g.lineCap = 'round';
-    g.strokeStyle = dark; g.lineWidth = 1.6; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
-    g.strokeStyle = light; g.lineWidth = 1.2; g.beginPath(); g.moveTo(x1 + .9, y1 + .9); g.lineTo(x2 + .9, y2 + .9); g.stroke();
+    g.strokeStyle = tone.groove; g.lineWidth = w; seg(g, x1 - .5, y1 - .6, x2 - .5, y2 - .6);
+    g.strokeStyle = tone.shine; g.lineWidth = w * .7; seg(g, x1 + .7, y1 + .9, x2 + .7, y2 + .9);
   }
-  function paintGarden(keep) {
-    if (!size()) return;
-    var sand = css('--sand'), dark = 'rgba(120, 104, 80, .2)', light = 'rgba(255, 255, 255, .55)';
-    g.fillStyle = sand; g.fillRect(0, 0, W, H);
-    if (!keep || !raked) {
-      // straight rake lines, broken by rings around each stone
-      for (var y = 10; y < H; y += 9) {
-        var x = 0;
-        for (var sx2 = 0; sx2 <= W; sx2 += 4) {
-          var inside = stones.some(function (s) { var dx = sx2 - s[0] * W, dy = y - s[1] * H; return Math.sqrt(dx * dx + dy * dy) < s[2] * W * 2.1; });
-          if (!inside) groove(sx2, y, sx2 + 4, y, dark, light);
-        }
+  // clean, smooth sand: no lines until you draw them
+  function paintGarden() { if (!size()) return; makeTone(); g.fillStyle = grain; g.fillRect(0, 0, W, H); live = true; }
+
+  var grains = [];
+  function carve(ax, ay, bx, by) {
+    var dx = bx - ax, dy = by - ay, L = Math.sqrt(dx * dx + dy * dy); if (L < .4) return;
+    var nx = -dy / L, ny = dx / L, t = TOOLS[tool], half = t.brush / 2;
+    g.lineCap = 'butt'; g.strokeStyle = grain; g.lineWidth = t.brush; seg(g, ax, ay, bx, by);
+    if (tool !== 'draw') { g.lineCap = 'round'; g.strokeStyle = tone.berm; g.lineWidth = 3; seg(g, ax + nx * (half + 1), ay + ny * (half + 1), bx + nx * (half + 1), by + ny * (half + 1)); seg(g, ax - nx * (half + 1), ay - ny * (half + 1), bx - nx * (half + 1), by - ny * (half + 1)); }
+    for (var k = 0; k < t.n; k++) { var off = (k - (t.n - 1) / 2) * t.gap; groove(ax + nx * off, ay + ny * off, bx + nx * off, by + ny * off, t.n === 1 ? 3 : tool === 'fine' ? 1.1 : 1.8); }
+    for (var j = 0; j < 3 && grains.length < 420; j++) {
+      var side = Math.random() < .5 ? -1 : 1, sp = Math.random() * .6 + .2;
+      grains.push({ x: bx + nx * side * (half + Math.random() * 4), y: by + ny * side * (half + Math.random() * 4), vx: nx * side * sp + dx / L * .3, vy: ny * side * sp + dy / L * .3, life: 1 });
+    }
+  }
+
+  // sand sound: soft brown noise with a sparse crackle; browsers only allow it after the first click or tap
+  var ac = null, gain = null, band = null;
+  function startSound() {
+    if (ac || !soundOn) return;
+    try {
+      ac = new (window.AudioContext || window.webkitAudioContext)();
+      var len = ac.sampleRate * 3, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0), b = 0;
+      for (var i = 0; i < len; i++) { var w = Math.random() * 2 - 1; b = (b + .02 * w) / 1.02; d[i] = b * 3.2 + (Math.random() < .006 ? w * .35 : 0); }
+      var src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
+      var hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 220;
+      band = ac.createBiquadFilter(); band.type = 'bandpass'; band.frequency.value = 900; band.Q.value = .6;
+      gain = ac.createGain(); gain.gain.value = 0;
+      src.connect(hp); hp.connect(band); band.connect(gain); gain.connect(ac.destination); src.start();
+    } catch (e) { ac = null; }
+  }
+  function voice(speed) {
+    if (!ac) return; var t = ac.currentTime;
+    gain.gain.setTargetAtTime(soundOn ? Math.min(1, speed / 9) * .5 : 0, t, .07);
+    band.frequency.setTargetAtTime(650 + Math.min(speed, 30) * 55, t, .1);
+  }
+  addEventListener('pointerdown', function wake() { startSound(); if (ac && ac.state === 'suspended') ac.resume(); }, { passive: true });
+
+  // the rake eases toward the pointer each frame, so lines come out smooth and unhurried
+  var aim = null, at = null, active = false, hinted = false, ang = 0;
+  function local(e) { var b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
+  function begin(e) { if (!live) paintGarden(); aim = local(e); at = aim.slice(); active = true; if (!hinted) { hinted = true; $('gardenHint').classList.add('gone'); } }
+  cv.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') begin(e); });
+  cv.addEventListener('pointerdown', function (e) { begin(e); try { cv.setPointerCapture(e.pointerId); } catch (err) {} });
+  cv.addEventListener('pointermove', function (e) { if (!active) begin(e); aim = local(e); });
+  function stop(e) { if (e.type === 'pointerup' && e.pointerType === 'mouse') return; active = false; at = null; voice(0); }
+  cv.addEventListener('pointerleave', stop); cv.addEventListener('pointerup', stop); cv.addEventListener('pointercancel', stop);
+
+  document.querySelectorAll('.tools [data-tool]').forEach(function (b) {
+    b.addEventListener('click', function () { tool = b.dataset.tool; document.querySelectorAll('.tools [data-tool]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); });
+  });
+  $('gardenSound').addEventListener('click', function () { soundOn = !soundOn; this.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); if (!soundOn) voice(0); });
+  // smoothing: a long wooden board sweeps left to right and leaves clean sand behind it
+  var sweep = -1;
+  $('smooth').addEventListener('click', function () { if (live) sweep = 0; });
+
+  var light = [[.2, .3, .5, .00011], [.7, .6, .42, .00008], [.45, .85, .36, .00014]];
+  function gardenFrame(t) {
+    requestAnimationFrame(gardenFrame);
+    if (!live || !W) return;
+    if (active && aim && at) {
+      var dx = aim[0] - at[0], dy = aim[1] - at[1], speed = 0;
+      if (dx * dx + dy * dy > .1) {
+        var sx3 = dx * .25, sy3 = dy * .25, n = Math.max(1, Math.ceil(Math.sqrt(sx3 * sx3 + sy3 * sy3) / 2.5));
+        for (var i = 0; i < n; i++) { var nx = at[0] + sx3 / n, ny = at[1] + sy3 / n; carve(at[0], at[1], nx, ny); at = [nx, ny]; }
+        speed = Math.sqrt(sx3 * sx3 + sy3 * sy3); if (speed > .4) ang = Math.atan2(dy, dx);
       }
-      stones.forEach(function (s) { for (var r = s[2] * W * 1.25; r < s[2] * W * 2.1; r += 9) { g.strokeStyle = dark; g.lineWidth = 1.6; g.beginPath(); g.arc(s[0] * W, s[1] * H, r, 0, 6.283); g.stroke(); g.strokeStyle = light; g.lineWidth = 1.2; g.beginPath(); g.arc(s[0] * W + .9, s[1] * H + .9, r, 0, 6.283); g.stroke(); } });
-      raked = g.getImageData(0, 0, cv.width, cv.height);
-    } else g.putImageData(raked, 0, 0);
-    drawStones();
-  }
-  function drawStones() {
+      voice(speed);
+    }
+    if (sweep >= 0) {
+      var prev = sweep * 1.06 * W; sweep = Math.min(1, sweep + .008); var edge = sweep * 1.06 * W;
+      g.fillStyle = grain; g.fillRect(prev - 2, 0, edge - prev + 2, H);
+      voice(sweep < 1 ? 6 : 0); if (sweep >= 1) sweep = -1;
+    }
+    o.clearRect(0, 0, W, H);
+    if (!tone.dark) {
+      o.globalCompositeOperation = 'soft-light';
+      light.forEach(function (l, i) {
+        var x = (l[0] + Math.sin(t * l[3] + i) * .06) * W, y = (l[1] + Math.cos(t * l[3] * 1.3 + i) * .05) * H, r = l[2] * W;
+        var gr = o.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, 'rgba(255, 236, 196, .55)'); gr.addColorStop(1, 'rgba(255, 236, 196, 0)');
+        o.fillStyle = gr; o.fillRect(0, 0, W, H);
+      });
+      o.globalCompositeOperation = 'source-over';
+    }
+    o.fillStyle = tone.speck;
+    for (var q = grains.length - 1; q >= 0; q--) { var p = grains[q]; p.x += p.vx; p.y += p.vy; p.vx *= .9; p.vy *= .9; p.life -= .02; if (p.life <= 0) { grains.splice(q, 1); continue; } o.globalAlpha = p.life; o.fillRect(p.x, p.y, 1.2, 1.2); }
+    o.globalAlpha = 1;
     stones.forEach(function (s, i) {
-      var x = s[0] * W, y = s[1] * H, r = s[2] * W;
-      var sh = g.createRadialGradient(x + r * .3, y + r * .4, r * .2, x + r * .3, y + r * .4, r * 1.4); sh.addColorStop(0, 'rgba(90, 80, 66, .22)'); sh.addColorStop(1, 'rgba(90, 80, 66, 0)');
-      g.fillStyle = sh; g.beginPath(); g.ellipse(x + r * .3, y + r * .4, r * 1.4, r * .9, 0, 0, 6.283); g.fill();
-      var gr = g.createRadialGradient(x - r * .35, y - r * .45, r * .05, x, y, r * 1.15); gr.addColorStop(0, '#d9d3c8'); gr.addColorStop(.55, '#a9a194'); gr.addColorStop(1, '#7f786d');
-      g.fillStyle = gr; g.beginPath(); g.ellipse(x, y, r, r * (.72 + i * .06), .3 * i, 0, 6.283); g.fill();
+      var x = s[0] * W, y = s[1] * H, r = s[2] * W, ry = r * s[3];
+      var sh = o.createRadialGradient(x + r * .25, y + ry * .45, r * .3, x + r * .25, y + ry * .45, r * 1.5); sh.addColorStop(0, tone.dark ? 'rgba(0, 0, 0, .5)' : 'rgba(70, 56, 36, .32)'); sh.addColorStop(1, 'rgba(70, 56, 36, 0)');
+      o.fillStyle = sh; o.beginPath(); o.ellipse(x + r * .25, y + ry * .45, r * 1.5, ry * 1.3, s[4], 0, 6.283); o.fill();
+      var gr = o.createRadialGradient(x - r * .35, y - ry * .5, r * .05, x, y, r * 1.1); gr.addColorStop(0, tone.dark ? '#7d828a' : '#dcd6cc'); gr.addColorStop(.5, tone.dark ? '#555a62' : '#a59d90'); gr.addColorStop(1, tone.dark ? '#33373d' : '#6f685d');
+      o.fillStyle = gr; o.beginPath(); o.ellipse(x, y, r, ry, s[4], 0, 6.283); o.fill();
+      if (i === 2) { var mg = o.createRadialGradient(x - r * .2, y - ry * .55, 0, x - r * .2, y - ry * .55, r * .55); mg.addColorStop(0, 'rgba(110, 150, 70, .85)'); mg.addColorStop(1, 'rgba(110, 150, 70, 0)'); o.fillStyle = mg; o.beginPath(); o.ellipse(x, y, r, ry, s[4], 0, 6.283); o.fill(); }
     });
+    if (active && at) {
+      var tl = TOOLS[tool];
+      o.save(); o.translate(at[0], at[1]); o.rotate(ang + Math.PI / 2);
+      if (tool === 'draw') { o.fillStyle = 'rgba(255, 250, 240, .5)'; o.strokeStyle = 'rgba(70, 58, 40, .45)'; o.lineWidth = 1; o.beginPath(); o.arc(0, 0, 6, 0, 6.283); o.fill(); o.stroke(); }
+      else { var wid = (tl.n - 1) * tl.gap + 12; o.fillStyle = 'rgba(150, 112, 70, .9)'; o.fillRect(-wid / 2, -6, wid, 5); o.fillStyle = 'rgba(120, 88, 52, .9)'; for (var m = 0; m < tl.n; m++) o.fillRect((m - (tl.n - 1) / 2) * tl.gap - .8, -1, 1.6, 3); }
+      o.restore();
+    }
+    if (sweep >= 0) { var ex = sweep * 1.06 * W; o.fillStyle = 'rgba(150, 112, 70, .92)'; o.fillRect(ex - 3, 0, 6, H); o.fillStyle = 'rgba(70, 56, 36, .16)'; o.fillRect(ex + 3, 0, 8, H); }
   }
-  // the rake: five tines dragged behind the pointer
-  var last = null;
-  function rake(x, y) {
-    if (!last) { last = [x, y]; return; }
-    var dx = x - last[0], dy = y - last[1], len = Math.sqrt(dx * dx + dy * dy); if (len < 2) return;
-    var nx = -dy / len, ny = dx / len, sand = css('--sand');
-    g.strokeStyle = sand; g.lineWidth = 42; g.lineCap = 'round'; g.beginPath(); g.moveTo(last[0], last[1]); g.lineTo(x, y); g.stroke();
-    for (var k = -2; k <= 2; k++) { var o = k * 8.5; groove(last[0] + nx * o, last[1] + ny * o, x + nx * o, y + ny * o, 'rgba(120, 104, 80, .36)', 'rgba(255, 255, 255, .7)'); }
-    last = [x, y]; drawStones();
-  }
-  function pos(e) { var b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
-  var down = false;
-  cv.addEventListener('pointerdown', function (e) { down = true; last = null; try { cv.setPointerCapture(e.pointerId); } catch (err) {} var p = pos(e); rake(p[0], p[1]); });
-  cv.addEventListener('pointermove', function (e) { if (!down) return; var p = pos(e); rake(p[0], p[1]); });
-  cv.addEventListener('pointerup', function () { down = false; last = null; raked = g.getImageData(0, 0, cv.width, cv.height); });
-  $('smooth').addEventListener('click', function () { raked = null; paintGarden(false); });
-  new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { paintGarden(false); o.disconnect(); } }).observe(cv);
-  addEventListener('resize', function () { clearTimeout(cv._t); cv._t = setTimeout(function () { raked = null; paintGarden(false); }, 200); });
+  requestAnimationFrame(gardenFrame);
+  new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { paintGarden(); ob.disconnect(); } }).observe(cv);
+  addEventListener('resize', function () { clearTimeout(cv._t); cv._t = setTimeout(function () { if (live) paintGarden(); }, 200); });
 
   /* copy email */
   $('copyEmail').addEventListener('click', function () {
