@@ -293,6 +293,49 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #creative { background: #1f2a6b; } :root:not([data-theme="light"]) .play { background: linear-gradient(120deg, #1f5f40, #1d6f8c); } }
   :root[data-theme="dark"] #creative { background: #1f2a6b; } :root[data-theme="dark"] .play { background: linear-gradient(120deg, #1f5f40, #1d6f8c); }
 
+  /* ---------- opening: the view from the engawa ---------- */
+  .hero { position: relative; height: clamp(640px, calc(100vh - 64px), 900px); overflow: hidden; background: #ffd9b8; }
+  #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: pan-y; }
+  .hero-text { position: relative; z-index: 2; max-width: 640px; padding: clamp(84px, 11vh, 124px) 0 0 clamp(52px, 7vw, 110px); pointer-events: none; }
+  .hero-text a { pointer-events: auto; }
+  .hero-text .mono { color: #b8442f; }
+  .hero h1 { font-size: clamp(40px, 4.9vw, 74px); font-weight: 400; line-height: 1.04; margin-top: 16px; color: #2f2a35; text-shadow: 0 2px 30px rgba(255, 244, 230, .7); }
+  .hero h1 em { font-style: italic; }
+  .w-sun { color: #e65a41; } .w-wind { color: #4f8f25; } .w-sea { color: #2368b8; }
+  .hero-sub { margin-top: 20px; font-size: 18px; max-width: 30em; color: #3a3240; text-shadow: 0 1px 18px rgba(255, 244, 230, .8); }
+  .hero .route { color: #4b4250; }
+  .hero .cta { margin-top: 28px; }
+  .hero .btn:not(.solid) { background: rgba(255, 250, 242, .7); color: #2f2a35; border-color: rgba(47, 42, 53, .35); }
+  .scene-tip { position: absolute; left: 50%; bottom: 3%; translate: -50% 0; z-index: 2; padding: 8px 16px; border-radius: 999px; background: rgba(255, 250, 242, .86); font-size: 13px; color: #3a3240; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 22px -12px rgba(0, 0, 0, .35); transition: opacity .4s; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero h1, :root:not([data-theme="light"]) .hero-sub, :root:not([data-theme="light"]) .hero .route { color: #f6efe6; text-shadow: 0 2px 24px rgba(10, 12, 40, .7); } :root:not([data-theme="light"]) .w-sun { color: #ffb08f; } :root:not([data-theme="light"]) .w-wind { color: #a8e07a; } :root:not([data-theme="light"]) .w-sea { color: #8fc8ff; } :root:not([data-theme="light"]) .hero .btn:not(.solid) { background: rgba(30, 28, 50, .6); color: #f6efe6; border-color: rgba(255, 255, 255, .35); } }
+  :root[data-theme="dark"] .hero h1, :root[data-theme="dark"] .hero-sub, :root[data-theme="dark"] .hero .route { color: #f6efe6; text-shadow: 0 2px 24px rgba(10, 12, 40, .7); }
+  :root[data-theme="dark"] .w-sun { color: #ffb08f; } :root[data-theme="dark"] .w-wind { color: #a8e07a; } :root[data-theme="dark"] .w-sea { color: #8fc8ff; }
+  :root[data-theme="dark"] .hero .btn:not(.solid) { background: rgba(30, 28, 50, .6); color: #f6efe6; border-color: rgba(255, 255, 255, .35); }
+  @media (max-width: 900px) {
+    .hero { height: 760px; }
+    .hero-text { padding: 92px 24px 0 34px; }
+    .scene-tip { white-space: normal; text-align: center; width: max-content; max-width: 86%; }
+  }
+
+  /* about with the portrait */
+  .about-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 96px; }
+  .about-grid .portrait { margin-left: 70px; }
+  .status { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 40px 0 0; padding: 22px 26px; border-radius: 16px; background: var(--paper); box-shadow: 0 20px 50px -34px rgba(47, 42, 53, .45); }
+  .status div { padding: 12px 0; border-bottom: 1px solid color-mix(in srgb, var(--sumi) 8%, transparent); }
+  .status div:nth-last-child(-n+1) { border-bottom: 0; }
+  .status dt { font: 400 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--ash); }
+  .status dd { margin: 4px 0 0; font: 400 18px/1.4 var(--display); }
+  .live { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #4f9a2c; box-shadow: 0 0 0 0 rgba(79, 154, 44, .5); vertical-align: middle; }
+  .anim .live { animation: ping 2s infinite; }
+  @keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(79, 154, 44, 0); } }
+
+  @media (max-width: 900px) {
+    .about-grid .portrait { margin-left: 0; }
+    .status { grid-template-columns: minmax(0, 1fr); }
+    .sig { font-size: 17px; white-space: nowrap; gap: 9px; }
+    .seal { width: 30px; height: 30px; font-size: 13px; }
+  }
+
   /* the small sun in the header travels its arc as you scroll */
   .bar-right { display: flex; align-items: center; gap: 14px; }
   #dayArc { display: block; overflow: visible; }
@@ -360,36 +403,20 @@
 
 <main id="top">
 
-  <!-- OPENING -->
-  <section class="opening">
-    <div class="wrap">
-      <div>
-        <p class="mono rise">Architect · Sustainable Building Systems</p>
-        <h1 class="rise" style="--d:150ms"><span>Namita</span><span>Deshpande</span></h1>
-        <p class="lede rise" style="--d:350ms">I design buildings that work with their climate and feel calm to be in. I trained as an architect in Bangalore, and I'm now studying Sustainable Building Systems at Northeastern University in Boston.</p>
-        <div class="route rise" style="--d:500ms"><span>Bangalore · 12.97° N</span><span class="leg" aria-hidden="true"><svg class="leaf" viewBox="0 0 24 24"><path d="M3 15C6 6 14 3 21 3c0 8-4 15-13 17-2 .4-4 0-5-1l4-4" fill="currentColor"/><path d="M4 20 15 9" stroke="#fff" stroke-opacity=".6" stroke-width="1" fill="none"/></svg></span><span>Boston · 42.34° N</span></div>
-        <div class="cta rise" style="--d:650ms">
-          <a class="btn solid" href="#grad">See my projects</a>
-          <a class="btn" href="#contact">Get in touch</a>
-        </div>
+  <!-- OPENING: the view from the engawa -->
+  <section class="hero" id="hero">
+    <canvas id="scene" aria-label="The view from a Japanese timber veranda: a wind chime, a paper lantern and a rain chain frame the sea, offshore wind turbines and a mountain trail with a hiker. Move to make the wind; click the sea to launch a paper boat."></canvas>
+    <div class="hero-text">
+      <p class="mono rise">Namita Deshpande · Architect, Sustainable Building Systems</p>
+      <h1 class="rise" style="--d:120ms">Designing with the <em class="w-sun">sun</em>, the <em class="w-wind">wind</em> and the <em class="w-sea">sea</em>.</h1>
+      <p class="hero-sub rise" style="--d:280ms">An architect from Bangalore, now in Boston. I love the ocean, long hikes and a good adventure, and I design buildings that work with their climate.</p>
+      <div class="route rise" style="--d:420ms"><span>Bangalore · 12.97° N</span><span class="leg" aria-hidden="true"><svg class="leaf" viewBox="0 0 24 24"><path d="M3 15C6 6 14 3 21 3c0 8-4 15-13 17-2 .4-4 0-5-1l4-4" fill="currentColor"/><path d="M4 20 15 9" stroke="#fff" stroke-opacity=".6" stroke-width="1" fill="none"/></svg></span><span>Boston · 42.34° N</span></div>
+      <div class="cta rise" style="--d:540ms">
+        <a class="btn solid" href="#grad">See my projects</a>
+        <a class="btn" href="#contact">Get in touch</a>
       </div>
-      <figure class="portrait rise" style="--d:300ms">
-        <svg class="bamboo l" viewBox="0 0 120 560" aria-hidden="true">
-          <g class="stalk"><path d="M60 560V18" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".55"/><path d="M55 470h10M55 380h10M55 290h10M55 200h10M55 112h10" stroke="currentColor" stroke-width="1.6" opacity=".9"/><path d="M62 200q30-14 56-8q-26 10-56 8ZM58 290q-30-16-56-8q26 10 56 8ZM62 112q24-22 50-22q-20 16-50 22ZM58 380q-26-10-48 0q22 6 48 0Z" fill="currentColor" opacity=".55"/></g>
-          <g class="stalk"><path d="M92 560V150" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" opacity=".45"/><path d="M88 480h8M88 400h8M88 320h8M88 240h8" stroke="currentColor" stroke-width="1.4" opacity=".8"/><path d="M94 240q22-16 26-4q-12 8-26 4ZM90 320q-20-10-34-2q16 8 34 2Z" fill="currentColor" opacity=".45"/></g>
-          <g class="stalk"><path d="M26 560V260" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity=".4"/><path d="M22 490h8M22 420h8M22 340h8" stroke="currentColor" stroke-width="1.3" opacity=".8"/><path d="M28 340q20-14 34-8q-16 10-34 8Z" fill="currentColor" opacity=".4"/></g>
-        </svg>
-        <svg class="bamboo r" viewBox="0 0 120 560" aria-hidden="true">
-          <g class="stalk"><path d="M60 560V60" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity=".45"/><path d="M55 470h10M55 370h10M55 270h10M55 170h10" stroke="currentColor" stroke-width="1.5" opacity=".85"/><path d="M62 170q30-14 54-6q-24 10-54 6ZM58 270q-28-14-50-6q22 10 50 6Z" fill="currentColor" opacity=".5"/></g>
-        </svg>
-        <div class="arch">
-          <img src="https://ugc.production.linktr.ee/bedcd49e-5587-4099-a657-d80676765a36_Me.jpeg?io=true&size=avatar-v3_0" alt="Namita Deshpande" width="360" height="498">
-          <span class="beam-light" aria-hidden="true"></span>
-          <canvas id="motes" aria-hidden="true"></canvas>
-        </div>
-        <figcaption id="archCap">Light from the window, wherever you are</figcaption>
-      </figure>
     </div>
+    <div class="scene-tip" id="sceneTip">Move to make the wind · click the sea to launch a paper boat</div>
   </section>
 
   <div class="line" aria-label="Light and shadow, natural materials, climate, people, craft, the space between">
@@ -404,17 +431,34 @@
     <div class="wrap">
       <header class="sec-head" data-reveal><span class="sec-no">01</span><div><h2>About me</h2><p class="mono sub">Architect · Building performance · Bangalore and Boston</p></div></header>
       <div class="about-grid">
-        <div class="text" data-reveal>
-          <p>I'm an architect who fell for the science behind good buildings.</p>
-          <p>Five years of studio in Bangalore taught me to read a site, study precedents and draw by hand. Graduate school is teaching me to model energy, point a thermal camera at a wall and ask occupants how a building really feels.</p>
-          <p>I like ideas that are creative and practical at the same time, and spaces that are kind to the people inside them and to the climate outside. Outside of work I make things with my hands: clay, glass mosaic, zentangle, sketches and photographs.</p>
+        <figure class="portrait" data-reveal>
+          <svg class="bamboo l" viewBox="0 0 120 560" aria-hidden="true">
+            <g class="stalk"><path d="M60 560V18" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".55"/><path d="M55 470h10M55 380h10M55 290h10M55 200h10M55 112h10" stroke="currentColor" stroke-width="1.6" opacity=".9"/><path d="M62 200q30-14 56-8q-26 10-56 8ZM58 290q-30-16-56-8q26 10 56 8ZM62 112q24-22 50-22q-20 16-50 22ZM58 380q-26-10-48 0q22 6 48 0Z" fill="currentColor" opacity=".55"/></g>
+            <g class="stalk"><path d="M92 560V150" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" opacity=".45"/><path d="M88 480h8M88 400h8M88 320h8M88 240h8" stroke="currentColor" stroke-width="1.4" opacity=".8"/><path d="M94 240q22-16 26-4q-12 8-26 4ZM90 320q-20-10-34-2q16 8 34 2Z" fill="currentColor" opacity=".45"/></g>
+            <g class="stalk"><path d="M26 560V260" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity=".4"/><path d="M22 490h8M22 420h8M22 340h8" stroke="currentColor" stroke-width="1.3" opacity=".8"/><path d="M28 340q20-14 34-8q-16 10-34 8Z" fill="currentColor" opacity=".4"/></g>
+          </svg>
+          <div class="arch">
+            <img src="https://ugc.production.linktr.ee/bedcd49e-5587-4099-a657-d80676765a36_Me.jpeg?io=true&size=avatar-v3_0" alt="Namita Deshpande" width="360" height="498" loading="lazy">
+            <span class="beam-light" aria-hidden="true"></span>
+            <canvas id="motes" aria-hidden="true"></canvas>
+          </div>
+          <figcaption id="archCap">Light from the window, wherever you are</figcaption>
+        </figure>
+        <div>
+          <div class="text" data-reveal>
+            <p>I'm an architect who fell for the science behind good buildings.</p>
+            <p>Five years of studio in Bangalore taught me to read a site, study precedents and draw by hand. Graduate school is teaching me to model energy, point a thermal camera at a wall and ask occupants how a building really feels.</p>
+            <p>I like ideas that are creative and practical at the same time, and spaces that are kind to the people inside them and to the climate outside.</p>
+            <p>Away from my desk you'll find me by the ocean, on a long hike or planning the next adventure. When I'm home, I make things with my hands: clay, glass mosaic, zentangle, sketches and photographs.</p>
+          </div>
+          <dl class="status" data-reveal>
+            <div><dt>Now</dt><dd>Sustainable Building Systems, Northeastern University</dd></div>
+            <div><dt>Status</dt><dd><i class="live" aria-hidden="true"></i>Open to internships and roles</dd></div>
+            <div><dt>Based in</dt><dd>Boston, MA</dd></div>
+            <div><dt>Before</dt><dd>B.Arch, BMS School of Architecture, 2020–2025</dd></div>
+            <div><dt>Languages</dt><dd>English, Kannada, Hindi, Telugu</dd></div>
+          </dl>
         </div>
-        <dl class="facts" data-stagger>
-          <div data-reveal><dt>Now</dt><dd>Sustainable Building Systems, Northeastern University, Boston</dd></div>
-          <div data-reveal><dt>Before</dt><dd>B.Arch, BMS School of Architecture, Bangalore, 2020–2025</dd></div>
-          <div data-reveal><dt>Languages</dt><dd>English, Kannada, Hindi and Telugu</dd></div>
-          <div data-reveal><dt>Looking for</dt><dd>Internships and roles in sustainable design and building performance</dd></div>
-        </dl>
       </div>
       <div class="skills" data-stagger>
         <div data-reveal><h3>Performance</h3><ul><li>Climate analysis</li><li>Energy modelling in eQUEST</li><li>Thermography and building science</li><li>LEED v5</li><li>Post-occupancy evaluation</li></ul></div>
@@ -565,7 +609,7 @@
     var dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     root.dataset.theme = dark ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
-    raked = null; paintGarden(false);
+    raked = null; paintGarden(false); if (window.__scene) window.__scene();
   });
 
   /* reveals, only for what starts below the fold */
@@ -616,6 +660,189 @@
   (function () {
     var h = new Date().getHours(), when = h < 5 ? 'late night' : h < 12 ? 'morning' : h < 17 ? 'afternoon' : h < 20 ? 'evening' : 'night';
     $('archCap').textContent = 'The light here follows your ' + when;
+  })();
+
+  /* ---------- the view from the engawa: sea, wind, a mountain trail, framed by a timber veranda ---------- */
+  (function () {
+    var cv = $('scene'); if (!cv) return;
+    var g = cv.getContext('2d'), W = 0, H = 0, hz = 0, eave = 0, post = 0, deck = 0, bg = null, dark = false;
+    var wind = 0, lastX = null, mxp = .5, boats = [], drops = [], clouds = [], stars = [], trail = [], trailLen = 0, last = 0;
+    function isDark() { return root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
+    if (matchMedia('(pointer: coarse)').matches) $('sceneTip').textContent = 'Drag to make the wind · tap the sea to launch a paper boat';
+
+    function build() {
+      var r = cv.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return false;
+      var d = Math.min(2, window.devicePixelRatio || 1); cv.width = W * d; cv.height = H * d; g.setTransform(d, 0, 0, d, 0, 0);
+      dark = isDark(); hz = H * (W < 700 ? .62 : .68); eave = Math.max(50, H * .075); post = Math.max(16, W * .026); deck = H * .12;
+      bg = document.createElement('canvas'); bg.width = W * d; bg.height = H * d; var b = bg.getContext('2d'); b.setTransform(d, 0, 0, d, 0, 0);
+      // sky
+      var sk = b.createLinearGradient(0, 0, 0, hz);
+      if (dark) { sk.addColorStop(0, '#0f1736'); sk.addColorStop(.6, '#33295a'); sk.addColorStop(1, '#7a3f6d'); }
+      else { sk.addColorStop(0, '#62bdf0'); sk.addColorStop(.55, '#ffd5b3'); sk.addColorStop(1, '#ffa79d'); }
+      b.fillStyle = sk; b.fillRect(0, 0, W, hz + 2);
+      stars = []; if (dark) for (var s = 0; s < 140; s++) stars.push([Math.random() * W, Math.random() * hz * .75, Math.random() * 1.2 + .2, Math.random() * 6.28]);
+      // sun or moon
+      var sx = W * .44, sy = hz - H * (dark ? .3 : .16), sr = Math.max(22, H * (dark ? .032 : .05));
+      var gl = b.createRadialGradient(sx, sy, sr * .4, sx, sy, sr * 5); gl.addColorStop(0, dark ? 'rgba(235,232,215,.4)' : 'rgba(255,240,200,.9)'); gl.addColorStop(1, 'rgba(255,240,200,0)');
+      b.fillStyle = gl; b.beginPath(); b.arc(sx, sy, sr * 5, 0, 6.283); b.fill();
+      b.fillStyle = dark ? '#f3efe0' : '#fff3d0'; b.beginPath(); b.arc(sx, sy, sr, 0, 6.283); b.fill();
+      // mountains on the right, with a hiking trail
+      function ridge(x0, x1, peakX, peakY, col, bump) {
+        b.fillStyle = col; b.beginPath(); b.moveTo(x0, hz + 2);
+        for (var x = x0; x <= x1; x += 4) {
+          var k = x < peakX ? (x - x0) / (peakX - x0) : (x1 - x) / (x1 - peakX), y = hz - (hz - peakY) * Math.pow(Math.max(0, k), 1.25) + Math.sin(x * .05) * bump;
+          b.lineTo(x, y);
+        }
+        b.lineTo(x1, hz + 2); b.fill();
+      }
+      ridge(W * .5, W * 1.02, W * .66, hz - H * .18, dark ? '#2e3a6a' : '#9fb7dd', 2);
+      var px = W * .8, py = hz - H * .31;
+      ridge(W * .58, W * 1.08, px, py, dark ? '#243451' : '#5f9a7c', 3);
+      b.fillStyle = dark ? '#d8d6ee' : '#f7f9fb'; b.beginPath(); b.moveTo(px - W * .03, py + H * .045); b.lineTo(px, py); b.lineTo(px + W * .035, py + H * .05); b.lineTo(px + W * .012, py + H * .04); b.lineTo(px - W * .008, py + H * .052); b.fill();
+      trail = [[W * .64, hz - 2], [W * .73, hz - H * .07], [W * .69, hz - H * .12], [W * .77, hz - H * .19], [W * .74, hz - H * .24], [px, py + 4]];
+      trailLen = 0; for (var i = 1; i < trail.length; i++) trailLen += Math.hypot(trail[i][0] - trail[i - 1][0], trail[i][1] - trail[i - 1][1]);
+      b.setLineDash([3, 5]); b.strokeStyle = dark ? 'rgba(255,255,255,.45)' : 'rgba(255,250,240,.9)'; b.lineWidth = 1.5;
+      b.beginPath(); b.moveTo(trail[0][0], trail[0][1]); for (var j = 1; j < trail.length; j++) b.lineTo(trail[j][0], trail[j][1]); b.stroke(); b.setLineDash([]);
+      // the sea's base
+      var sea = b.createLinearGradient(0, hz, 0, H - deck);
+      if (dark) { sea.addColorStop(0, '#2c2f63'); sea.addColorStop(1, '#0e1d3c'); } else { sea.addColorStop(0, '#5fb1dd'); sea.addColorStop(1, '#1e6fae'); }
+      b.fillStyle = sea; b.fillRect(0, hz, W, H - hz);
+      var hzg = b.createLinearGradient(0, hz - 3, 0, hz + 6); hzg.addColorStop(0, dark ? 'rgba(200,120,170,.6)' : 'rgba(255,230,210,.95)'); hzg.addColorStop(1, 'rgba(255,255,255,0)');
+      b.fillStyle = hzg; b.fillRect(0, hz - 3, W, 9);
+      clouds = []; if (!dark) for (var c = 0; c < 5; c++) clouds.push({ x: Math.random() * W, y: H * (.08 + Math.random() * .28), s: .6 + Math.random() * .9 });
+      return true;
+    }
+
+    function at(p) {
+      var dist = p * trailLen;
+      for (var i = 1; i < trail.length; i++) {
+        var a = trail[i - 1], c = trail[i], l = Math.hypot(c[0] - a[0], c[1] - a[1]);
+        if (dist <= l) return [a[0] + (c[0] - a[0]) * dist / l, a[1] + (c[1] - a[1]) * dist / l];
+        dist -= l;
+      }
+      return trail[trail.length - 1];
+    }
+    function cloud(c) {
+      g.fillStyle = 'rgba(255,255,255,.85)';
+      [[0, 0, 26], [24, -8, 22], [50, 0, 24], [22, 8, 22]].forEach(function (p) { g.beginPath(); g.ellipse(c.x + p[0] * c.s, c.y + p[1] * c.s, p[2] * c.s * 1.3, p[2] * c.s * .8, 0, 0, 6.283); g.fill(); });
+    }
+    function turbine(x, t, k) {
+      var h = H * .085 * k, top = hz - h;
+      g.strokeStyle = dark ? 'rgba(220,225,255,.75)' : 'rgba(255,255,255,.95)'; g.lineWidth = 1.6 * k; g.beginPath(); g.moveTo(x, hz + 1); g.lineTo(x, top); g.stroke();
+      var a = t * (1.2 + wind * 5) + x;
+      for (var i = 0; i < 3; i++) { var an = a + i * 2.094; g.beginPath(); g.moveTo(x, top); g.lineTo(x + Math.cos(an) * h * .55, top + Math.sin(an) * h * .55); g.stroke(); }
+      if (dark && Math.sin(t * 3 + x) > .6) { g.fillStyle = '#ff5a5a'; g.beginPath(); g.arc(x, top, 1.8, 0, 6.283); g.fill(); }
+    }
+    function waves(t) {
+      var rows = 15, bottom = H - deck;
+      for (var r = 0; r < rows; r++) {
+        var k = Math.pow((r + 1) / rows, 1.6), y = hz + 4 + k * (bottom - hz - 4), sp = 10 + k * 70, rad = sp * .62;
+        var off = (t * (14 + 40 * k) * (1 + wind * 2.5) + r * 37) % sp;
+        for (var x = -sp + off; x < W + sp; x += sp) {
+          var near = 1 - Math.min(1, Math.abs(x / W - mxp) * 2), lift = Math.sin(x * .018 + t * 1.6 + r) * 3 * k * (1 + wind * 3 + near * wind * 4);
+          var cy = y + lift;
+          g.fillStyle = dark ? (r % 2 ? '#1d2d5c' : '#24356a') : (r % 2 ? '#2f86c4' : '#3a96cf');
+          g.beginPath(); g.arc(x, cy, rad, Math.PI, 0); g.fill();
+          g.strokeStyle = dark ? 'rgba(120,230,255,' + (.25 + k * .35) + ')' : 'rgba(255,255,255,' + (.35 + k * .45) + ')';
+          g.lineWidth = Math.max(.6, k * 1.6);
+          for (var q = 1; q <= 3; q++) { g.beginPath(); g.arc(x, cy, rad * (1 - q * .24), Math.PI, 0); g.stroke(); }
+        }
+      }
+    }
+    function boat(b, t) {
+      var k = Math.max(.05, (b.y - hz) / (H - deck - hz)), s = 8 + k * 30, bob = Math.sin(t * 2.4 + b.ph) * 2 * k;
+      g.save(); g.translate(b.x, b.y + bob); g.rotate(Math.sin(t * 1.8 + b.ph) * .06);
+      g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(0, s * .32, s * .9, s * .12, 0, 0, 6.283); g.fill();
+      g.fillStyle = '#ffffff'; g.beginPath(); g.moveTo(-s, 0); g.lineTo(s, 0); g.lineTo(s * .62, s * .3); g.lineTo(-s * .62, s * .3); g.closePath(); g.fill();
+      g.fillStyle = '#f3ece0'; g.beginPath(); g.moveTo(-s * .05, 0); g.lineTo(-s * .05, -s * .95); g.lineTo(s * .55, 0); g.closePath(); g.fill();
+      g.fillStyle = '#e65a41'; g.beginPath(); g.moveTo(-s * .12, 0); g.lineTo(-s * .12, -s * .7); g.lineTo(-s * .62, 0); g.closePath(); g.fill();
+      g.restore();
+    }
+    function frame(t) {
+      var wood = dark ? '#4a3323' : '#7a5232', woodHi = dark ? '#5e4330' : '#966843', woodLo = dark ? '#33231a' : '#5b3b24';
+      // deck boards
+      g.fillStyle = dark ? '#5a3f2a' : '#c4935f'; g.fillRect(0, H - deck, W, deck);
+      g.strokeStyle = dark ? 'rgba(0,0,0,.35)' : 'rgba(90,58,34,.35)'; g.lineWidth = 1;
+      for (var i = 0, y = H - deck + 6; y < H; i++, y += 8 + i * 3) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+      g.fillStyle = woodLo; g.fillRect(0, H - deck, W, 5);
+      // posts
+      [[0, post], [W - post, post]].forEach(function (p) {
+        g.fillStyle = wood; g.fillRect(p[0], 0, p[1], H);
+        g.strokeStyle = woodHi; g.lineWidth = 1; for (var x = 4; x < p[1]; x += 5) { g.beginPath(); g.moveTo(p[0] + x, 0); g.lineTo(p[0] + x + Math.sin(x) * 2, H); g.stroke(); }
+        g.fillStyle = woodLo; g.fillRect(p[0] + (p[0] ? 0 : p[1] - 3), 0, 3, H);
+      });
+      // the eave, with rafter ends
+      g.fillStyle = dark ? '#2d2620' : '#3e342c'; g.fillRect(0, 0, W, eave * .35);
+      g.fillStyle = wood; g.fillRect(0, eave * .35, W, eave * .65);
+      g.fillStyle = woodHi; for (var rx = post + 10; rx < W - post; rx += 34) g.fillRect(rx, eave * .62, 16, eave * .38);
+      g.fillStyle = woodLo; g.fillRect(0, eave - 3, W, 3);
+      // furin: a glass wind chime that answers the wind
+      var fx = W * .62, fy = eave, sw = Math.sin(t * 2.1) * .08 + wind * .9;
+      g.strokeStyle = dark ? '#ccc' : '#5b4a3c'; g.lineWidth = 1; g.beginPath(); g.moveTo(fx, fy); g.lineTo(fx, fy + 26); g.stroke();
+      g.save(); g.translate(fx, fy + 26); g.rotate(sw * .4);
+      g.fillStyle = 'rgba(200,235,255,.85)'; g.beginPath(); g.arc(0, 12, 12, Math.PI, 0); g.lineTo(12, 14); g.lineTo(-12, 14); g.fill();
+      g.fillStyle = '#e65a41'; g.beginPath(); g.ellipse(-3, 7, 3.5, 2, .4, 0, 6.283); g.fill();
+      g.strokeStyle = dark ? '#ccc' : '#5b4a3c'; g.beginPath(); g.moveTo(0, 14); g.lineTo(0, 30); g.stroke();
+      g.translate(0, 30); g.rotate(sw); g.fillStyle = '#fff4d6'; g.fillRect(-5, 0, 10, 34); g.fillStyle = '#4f8f25'; g.fillRect(-5, 26, 10, 3);
+      g.restore();
+      // a paper lantern, lit at night
+      var lx = W * .86, ly = eave;
+      g.strokeStyle = dark ? '#ccc' : '#5b4a3c'; g.beginPath(); g.moveTo(lx, ly); g.lineTo(lx, ly + 18); g.stroke();
+      if (dark) { var lg = g.createRadialGradient(lx, ly + 48, 4, lx, ly + 48, 80); lg.addColorStop(0, 'rgba(255,190,110,.55)'); lg.addColorStop(1, 'rgba(255,190,110,0)'); g.fillStyle = lg; g.beginPath(); g.arc(lx, ly + 48, 80, 0, 6.283); g.fill(); }
+      g.fillStyle = dark ? '#ffb15c' : '#e8553d'; g.beginPath(); g.ellipse(lx, ly + 48, 20, 28, 0, 0, 6.283); g.fill();
+      g.strokeStyle = dark ? 'rgba(160,70,20,.6)' : 'rgba(120,30,20,.45)'; for (var h = -20; h <= 20; h += 8) { g.beginPath(); g.ellipse(lx, ly + 48 + h * .9, Math.sqrt(Math.max(0, 1 - h * h / 784)) * 20, 1, 0, 0, 6.283); g.stroke(); }
+      g.fillStyle = '#2f2a35'; g.fillRect(lx - 10, ly + 18, 20, 4); g.fillRect(lx - 10, ly + 74, 20, 4);
+      // kusari-doi: a rain chain into a stone basin
+      var cx = W - post - 16, basinY = H - deck - 2;
+      g.strokeStyle = dark ? '#b89a6a' : '#9a6b2f'; g.lineWidth = 1.4;
+      for (var cy = eave + 4; cy < basinY - 14; cy += 14) { g.beginPath(); g.moveTo(cx - 5, cy); g.lineTo(cx - 3, cy + 9); g.lineTo(cx + 3, cy + 9); g.lineTo(cx + 5, cy); g.stroke(); }
+      g.fillStyle = dark ? '#5d5a66' : '#9c968c'; g.beginPath(); g.ellipse(cx, basinY + 4, 22, 9, 0, 0, 6.283); g.fill();
+      g.fillStyle = dark ? '#3a5f8a' : '#7cc3e8'; g.beginPath(); g.ellipse(cx, basinY + 2, 16, 5, 0, 0, 6.283); g.fill();
+      drops.forEach(function (d) { g.fillStyle = dark ? 'rgba(150,220,255,.9)' : 'rgba(80,170,230,.95)'; g.beginPath(); g.ellipse(cx, d.y, 1.6, 3, 0, 0, 6.283); g.fill(); });
+    }
+
+    function draw(t, dt) {
+      g.clearRect(0, 0, W, H); g.drawImage(bg, 0, 0, W, H);
+      stars.forEach(function (s) { g.globalAlpha = .4 + Math.sin(t * 1.5 + s[3]) * .4; g.fillStyle = '#fff'; g.beginPath(); g.arc(s[0], s[1], s[2], 0, 6.283); g.fill(); }); g.globalAlpha = 1;
+      clouds.forEach(function (c) { c.x += (6 + wind * 120) * c.s * dt; if (c.x > W + 120) c.x = -160; cloud(c); });
+      [.08, .17, .27, .37].forEach(function (x, i) { turbine(W * x, t, .7 + i * .12); });
+      // the hiker climbs, rests at the summit, and starts again
+      var cyc = (t * .025) % 1.15, p = Math.min(1, cyc), h = at(p);
+      g.fillStyle = '#e65a41'; g.beginPath(); g.arc(h[0], h[1] - 6, 2.2, 0, 6.283); g.fill();
+      g.strokeStyle = '#2f2a35'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(h[0], h[1] - 4); g.lineTo(h[0], h[1] + 1); g.stroke();
+      var top = trail[trail.length - 1], fl = Math.sin(t * 6) * 2 + wind * 6;
+      g.strokeStyle = dark ? '#ddd' : '#2f2a35'; g.lineWidth = 1; g.beginPath(); g.moveTo(top[0], top[1]); g.lineTo(top[0], top[1] - 14); g.stroke();
+      g.fillStyle = '#f0a92b'; g.beginPath(); g.moveTo(top[0], top[1] - 14); g.lineTo(top[0] + 10 + fl, top[1] - 11); g.lineTo(top[0], top[1] - 8); g.fill();
+      waves(t);
+      boats = boats.filter(function (b) { return b.y > hz + 3; });
+      boats.forEach(function (b) { var k = (b.y - hz) / (H - deck - hz); b.y -= (6 + 22 * k) * dt * (1 + wind); b.x += wind * 60 * dt * k; boat(b, t); });
+      if (Math.random() < dt * 1.4) drops.push({ y: eave + 6 });
+      drops = drops.filter(function (d) { d.y += 120 * dt; return d.y < H - deck - 2; });
+      frame(t);
+      wind *= Math.pow(.25, dt);
+    }
+    var on = false;
+    function loop(ts) { if (!on) return; var t = ts / 1000, dt = Math.min(.05, t - (last || t)); last = t; draw(t, dt); requestAnimationFrame(loop); }
+    function rebuild() { if (build()) draw(performance.now() / 1000, 0); }
+    window.__scene = rebuild;
+    addEventListener('pointermove', function (e) {
+      var r = cv.getBoundingClientRect(); if (e.clientY < r.top || e.clientY > r.bottom) { lastX = null; return; }
+      if (lastX !== null) wind = Math.min(1, wind + Math.abs(e.clientX - lastX) / 900);
+      lastX = e.clientX; mxp = (e.clientX - r.left) / r.width;
+    }, { passive: true });
+    cv.addEventListener('click', function (e) {
+      var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      if (y < hz + 12 || y > H - deck || x < post || x > W - post) { $('sceneTip').textContent = 'Click the water to launch a paper boat'; return; }
+      boats.push({ x: x, y: y, ph: Math.random() * 6.28 }); if (boats.length > 24) boats.shift();
+      var n = (cv._launched = (cv._launched || 0) + 1);
+      $('sceneTip').textContent = n === 1 ? 'Your paper boat is off on an adventure' : n + ' paper boats launched · bon voyage';
+      if (!motion) draw(performance.now() / 1000, 0);
+    });
+    new IntersectionObserver(function (es) {
+      var vis = es[0].isIntersecting; if (vis && !bg) build();
+      if (motion) { on = vis; if (on) { last = 0; requestAnimationFrame(loop); } } else if (vis) draw(8, 0);
+    }, { threshold: 0.02 }).observe(cv);
+    addEventListener('resize', function () { clearTimeout(cv._t); cv._t = setTimeout(rebuild, 200); });
   })();
 
   /* creative exhibition (titles and captions from my portfolio) */
