@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoneyMap</title>
+<meta name="description" content="Personal finance and investing basics in plain English, plus a practice dashboard with real historical stock prices and fake money.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Free · No sign-up · Fake money only</span>
+        <h1>Money, explained like a <span class="hl">friend<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 Q 25 2 50 8 T 100 8 T 150 8 T 197 6" fill="none" style="stroke:var(--sun)" stroke-width="5" stroke-linecap="round"/></svg></span> would.</h1>
+        <p class="lead">Short, plain-English lessons on budgeting, saving, credit, and the stock market. Then practice investing with <strong>real past stock prices</strong> and <strong>$10,000 of pretend money</strong>.</p>
+        <div class="ctas">
+          <a class="btn primary lg" id="hero-cta" href="learn.html">Start lesson 1</a>
+          <a class="btn lg" href="practice.html">Try the Time Machine</a>
+        </div>
+        <div class="chips">
+          <span class="chip tone-coral"><i></i>10 bite-size lessons</span>
+          <span class="chip tone-mint"><i></i>4 animated explainers</span>
+          <span class="chip tone-purple"><i></i>Real market history</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 440 410">
+          <circle cx="225" cy="215" r="185" style="fill:var(--surface)" opacity=".7"/>
+          <g style="fill:var(--accent)" opacity=".22">
+            <rect class="a-grow" x="58" y="190" width="34" height="80" rx="10" style="animation-delay:.1s"/>
+            <rect class="a-grow" x="104" y="160" width="34" height="110" rx="10" style="animation-delay:.25s"/>
+            <rect class="a-grow" x="330" y="120" width="34" height="150" rx="10" style="animation-delay:.4s"/>
+            <rect class="a-grow" x="376" y="80" width="34" height="190" rx="10" style="animation-delay:.55s"/>
+          </g>
+          <path class="a-draw" d="M40 205 L110 168 L170 150 L250 98 L330 78 L398 34" fill="none" style="stroke:var(--accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M378 30 L402 30 L402 54" fill="none" style="stroke:var(--accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" class="a-draw"/>
+          <g class="a-bob">
+            <path d="M118 290 c-22 -6 -26 18 -8 18 c14 0 6 -20 -6 -10" fill="none" style="stroke:var(--coral)" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="225" cy="300" rx="112" ry="80" style="fill:var(--coral)"/>
+            <ellipse cx="205" cy="322" rx="62" ry="34" fill="#fff" opacity=".18"/>
+            <path d="M282 236 L306 196 L318 246 Z" style="fill:var(--coral)"/>
+            <path d="M290 234 L304 210 L310 240 Z" style="fill:var(--coral-ink)" opacity=".5"/>
+            <rect x="150" y="360" width="28" height="34" rx="10" style="fill:var(--coral)"/>
+            <rect x="196" y="364" width="28" height="30" rx="10" style="fill:var(--coral)"/>
+            <rect x="250" y="364" width="28" height="30" rx="10" style="fill:var(--coral)"/>
+            <rect x="292" y="360" width="28" height="34" rx="10" style="fill:var(--coral)"/>
+            <ellipse cx="333" cy="303" rx="26" ry="23" style="fill:var(--coral-ink)" opacity=".85"/>
+            <circle cx="325" cy="303" r="4" style="fill:var(--ink)" opacity=".7"/><circle cx="341" cy="303" r="4" style="fill:var(--ink)" opacity=".7"/>
+            <circle cx="298" cy="276" r="7" style="fill:var(--ink)"/><circle cx="300" cy="273" r="2.2" fill="#fff"/>
+            <rect x="190" y="225" width="58" height="10" rx="5" style="fill:var(--coral-ink)"/>
+            <path d="M206 228 C 206 196, 200 176, 206 150" fill="none" style="stroke:var(--mint)" stroke-width="6" stroke-linecap="round"/>
+            <ellipse class="a-sway" cx="184" cy="184" rx="22" ry="11" transform="rotate(-25 184 184)" style="fill:var(--mint)"/>
+            <ellipse class="a-sway" cx="228" cy="168" rx="22" ry="11" transform="rotate(25 228 168)" style="fill:var(--mint);animation-delay:.6s"/>
+            <circle cx="206" cy="138" r="18" style="fill:var(--sun)"/>
+            <text x="206" y="146" text-anchor="middle" font-size="22" font-weight="800" style="fill:var(--sun-ink);font-family:var(--font-head)">$</text>
+          </g>
+          <g class="a-drop" style="animation-delay:.2s"><circle cx="236" cy="150" r="13" style="fill:var(--sun);stroke:var(--sun-ink)" stroke-width="2"/></g>
+          <g class="a-drop" style="animation-delay:1.8s"><circle cx="224" cy="150" r="11" style="fill:var(--sun);stroke:var(--sun-ink)" stroke-width="2"/></g>
+          <path class="a-twinkle" d="M372 150 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z" style="fill:var(--sun)"/>
+          <path class="a-twinkle" d="M70 92 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" style="fill:var(--coral);animation-delay:.9s"/>
+          <path class="a-twinkle" d="M398 250 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" style="fill:var(--mint);animation-delay:1.5s"/>
+          <path class="a-twinkle" d="M40 330 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" style="fill:var(--accent);animation-delay:.4s"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card journey-card">
+      <div class="section-head">
+        <div><span class="eyebrow">Your journey</span><h2>Ten stops to money confidence</h2></div>
+        <div class="player" id="player"></div>
+      </div>
+      <div class="journey" id="journey"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid grid-3">
+      <a class="card feature lift tone-coral" href="learn.html" style="text-decoration:none;color:inherit">
+        <div class="icon-tile" data-glyph="book"></div>
+        <h3>Bite-size lessons</h3>
+        <p class="muted">From "what is a budget?" to reading a stock page. Every tricky word is explained, and each lesson ends with a quick quiz.</p>
+      </a>
+      <a class="card feature lift tone-purple" href="videos.html" style="text-decoration:none;color:inherit">
+        <div class="icon-tile" data-glyph="play"></div>
+        <h3>Watch ideas move</h3>
+        <p class="muted">Four narrated, captioned videos plus step-by-step animations show compound interest, diversification, and more.</p>
+      </a>
+      <a class="card feature lift tone-mint" href="practice.html" style="text-decoration:none;color:inherit">
+        <div class="icon-tile" data-glyph="rocket"></div>
+        <h3>Time Machine practice</h3>
+        <p class="muted">Go back to 2020 with $10,000 of fake money. Face real news, choose Buy, Hold, or Sell, and see what really happened.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="card teaser">
+      <div>
+        <span class="eyebrow">Real history, zero risk</span>
+        <h2 style="margin-top:6px">Would you have panicked in March 2020?</h2>
+        <p class="muted">This is the real S&amp;P 500 index fund (SPY), week by week. Prices crashed, then came roaring back. In the Time Machine, you make the call before you know what happens next.</p>
+        <a class="btn coral" href="practice.html">Step into 2020</a>
+      </div>
+      <div id="spark"></div>
+    </div>
+  </section>
+
+  <section id="explainers">
+    <div class="section-head"><div><span class="eyebrow">See it, don't just read it</span><h2>Animated explainers</h2></div><p class="muted" style="margin:0">Press Play, or step through with Next.</p></div>
+    <div class="x-tabs tickers" role="tablist"></div>
+    <div id="x-stage"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><div><span class="eyebrow">Collect them all</span><h2>Badges</h2></div><p class="muted" style="margin:0" id="badge-count"></p></div>
+    <div class="badges" id="badges"></div>
+  </section>
+</main>
+<script src="js/common.js"></script>
+<script src="js/game.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/explainers.js"></script>
+<script src="js/lessons-1.js"></script>
+<script src="js/lessons-2.js"></script>
+<script src="data/prices.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
